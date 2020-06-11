@@ -1,0 +1,12 @@
+TopDown working notes:
+
+Fixed the pathfinding and the player shooting behaviour.
+
+Work on adding ui for the player, should follow the camera staying in the top left of the screen.
+When player takes damage, the damage should be propagated out to the ui and be informed and update.
+Follow the tutorial on a "shockwave" shader effect, this should be played when the player takes damage. (To fully sell the shockwave enemies + bullets? should be pushed back some amount)
+On player taking damage the player should flash (set alpha to low then back to normal and back) during said time player should not be able to retake damage
+Add collision so that when the enemy collides with the player all above happen.
+
+Current progress:
+Shockwave shader setup, only requires the players position to be passed in as uv co-ords rather than as world position. Now somewhat setup and working

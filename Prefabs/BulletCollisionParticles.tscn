@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/BulletCollisionParticles.gd" type="Script" id=1]
+
+[node name="CollisionParticles" type="CPUParticles2D"]
+emitting = false
+amount = 5
+lifetime = 0.35
+one_shot = true
+explosiveness = 0.75
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+color = Color( 0.964706, 0.886275, 0.568627, 1 )
+hue_variation = 0.1
+hue_variation_random = 0.5
+script = ExtResource( 1 )

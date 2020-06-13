@@ -3,7 +3,7 @@
 extends Node2D
 
 # The player node
-onready var player = $Player
+onready var player:Player = $Player
 
 # The player camera, used when no room is currently active
 onready var _playerCamera = $PlayerCamera
@@ -14,12 +14,15 @@ onready var _bulletManager = $BulletManager
 # The currently active room
 onready var _activeRoom = $StartRoom
 
+onready var _gui = $GUI
+
 # The text to instantiate when a bullet collides
 var dmgText = preload("res://Prefabs/DamageText.tscn")
 
 func _ready():
 	player.connect("_bulletCreated", self, "_onBulletCreated")
 	player.connect("moved", self, "_onPlayerMove")
+	player.connect("damageTaken", self, "_onPlayerDamageTaken")
 	for child in get_children():
 		if (child != null) && child.has_method("isRoom"):
 			child.connect("playerExited", self, "_playerExited")
@@ -57,4 +60,8 @@ func _playerExited():
 func _playerEntered(newRoom):
 	_activeRoom = newRoom
 	_activeRoom.activateCamera()
+	pass
+
+func _onPlayerDamageTaken() -> void:
+	_gui.updateLife(player.getLife(), player.MAX_LIFE)
 	pass

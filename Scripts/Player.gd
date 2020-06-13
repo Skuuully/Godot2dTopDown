@@ -7,6 +7,9 @@ class_name Player
 export var ACCELERATION:float = 100
 export var MAX_SPEED:float = 100
 
+export var MAX_LIFE:int = 6;
+var _life:int = MAX_LIFE setget , getLife;
+
 # Bullet based stuff
 export var BULLETSPEED:float = 120;
 export var TIMEBETWEENSHOTS:float = 0.2
@@ -22,6 +25,7 @@ onready var shockwave:ColorRect = $ScreenRenderLayer/Shockwave
 # fired when player positions changes, additionally sends out new position
 signal moved()
 signal _bulletCreated(newBullet)
+signal damageTaken()
 
 func _physics_process(_delta) -> void:
 	move()
@@ -68,11 +72,14 @@ func checkCollisions() -> void:
 
 func onDamageTaken() -> void:
 	if invincibleTimer.is_stopped():
-		doShockwave()
-		flash()
-		invincibleTimer.start()
-	
-	pass
+		_life -= 1;
+		emit_signal("damageTaken")
+		if (_life <= 0):
+			died()
+		else:
+			doShockwave()
+			flash()
+			invincibleTimer.start()
 
 func doShockwave() -> void:
 	# Get the top left position of the camera
@@ -92,6 +99,12 @@ func flash() -> void:
 	modulate.a = 0.3
 	yield(get_tree().create_timer(invincibleTimer.wait_time / 4), "timeout")
 	modulate.a = 1.0
+
+func died() -> void:
+	assert(_life <= 0)
+
+func getLife() -> int:
+	return _life;
 
 # Method that can be cheked for on nodes to determine if the node is the player
 # node.has_method("isPlayer") will return true, the method need not do anything

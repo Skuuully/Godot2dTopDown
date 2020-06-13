@@ -9,6 +9,26 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "BasicEnemyState",
+"class": "BasicEnemyIdle",
+"language": "GDScript",
+"path": "res://Scripts/BasicEnemy/BasicEnemyIdle.gd"
+}, {
+"base": "BasicEnemyState",
+"class": "BasicEnemyMoving",
+"language": "GDScript",
+"path": "res://Scripts/BasicEnemy/BasicEnemyMoving.gd"
+}, {
+"base": "Node",
+"class": "BasicEnemyState",
+"language": "GDScript",
+"path": "res://Scripts/BasicEnemy/BasicEnemyState.gd"
+}, {
+"base": "Node",
+"class": "BasicEnemyStateMachine",
+"language": "GDScript",
+"path": "res://Scripts/BasicEnemy/BasicEnemyStateMachine.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -25,6 +45,10 @@ _global_script_classes=[ {
 "path": "res://Scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"BasicEnemyIdle": "",
+"BasicEnemyMoving": "",
+"BasicEnemyState": "",
+"BasicEnemyStateMachine": "",
 "Bullet": "",
 "Enemy": "",
 "Player": ""
@@ -38,8 +62,8 @@ config/icon="res://Sprites/icon.png"
 
 [display]
 
-window/size/width=360
-window/size/height=180
+window/size/width=720
+window/size/height=360
 window/size/test_width=1080
 window/size/test_height=540
 window/stretch/mode="2d"

@@ -9,10 +9,7 @@
 [ext_resource path="res://Scripts/BulletManager.gd" type="Script" id=7]
 [ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=9]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Shockwave"
-length = 0.4
+[ext_resource path="res://Prefabs/BasicEnemy.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=2]
 vertices = PoolVector2Array( 16, 16, 336, 16, 336, 160, 16, 160 )
@@ -49,9 +46,6 @@ extents = Vector2( 160, 72 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Shockwave = SubResource( 1 )
 
 [node name="GUI" parent="." instance=ExtResource( 9 )]
 margin_left = -8.0
@@ -170,6 +164,8 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
+
+[node name="BasicEnemy" parent="StartRoom" instance=ExtResource( 10 )]
 
 [node name="TileMap" type="TileMap" parent="StartRoom"]
 z_index = -1

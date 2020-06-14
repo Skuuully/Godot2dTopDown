@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BasicEnemy",
+"language": "GDScript",
+"path": "res://Scripts/BasicEnemy/BasicEnemy.gd"
+}, {
 "base": "BasicEnemyState",
 "class": "BasicEnemyIdle",
 "language": "GDScript",
@@ -43,15 +48,22 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
+}, {
+"base": "Node2D",
+"class": "Room",
+"language": "GDScript",
+"path": "res://Scripts/Room.gd"
 } ]
 _global_script_class_icons={
+"BasicEnemy": "",
 "BasicEnemyIdle": "",
 "BasicEnemyMoving": "",
 "BasicEnemyState": "",
 "BasicEnemyStateMachine": "",
 "Bullet": "",
 "Enemy": "",
-"Player": ""
+"Player": "",
+"Room": ""
 }
 
 [application]

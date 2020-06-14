@@ -1,6 +1,7 @@
 # Room
 
 extends Node2D
+class_name Room
 
 enum state {ACTIVE, INACTIVE}
 var currentState
@@ -45,7 +46,10 @@ func playerMoved(position):
 		_navigation.setPlayerPosition(position)
 	
 		for enemy in _enemies:
-			enemy.setRoute(_navigation._getRouteToPlayer(enemy.global_position))
+			if enemy.has_method("setRoute"):
+				enemy.setRoute(_navigation._getRouteToPlayer(enemy.global_position))
+			elif enemy.has_method("setPlayerPosition"):
+				enemy.setPlayerPosition(position)
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
@@ -66,6 +70,9 @@ func _onEnemyDeath(enemy):
 
 func getCameraPosition():
 	return _camera.position
+
+func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> PoolVector2Array:
+	return _navigation.getRoute(currentPosition, targetPosition)
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

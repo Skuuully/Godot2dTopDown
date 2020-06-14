@@ -4,8 +4,13 @@ class_name BasicEnemyStateMachine
 # Different states for the state machine
 enum State {IDLE, MOVING, SHOOTING}
 
-# The currentStaet of the node, default to idle
-onready var currentState:BasicEnemyState = $Idle
+# The base enemy class
+var baseEnemy = get_parent()
+
+# The currentState of the node, default to idle
+# The state will be of type BasicEnemyState, not statically typed to avoid
+# cyclic dependancy
+onready var currentState = $Idle
 
 # Node for the idle state
 onready var idleState = $Idle
@@ -15,6 +20,8 @@ onready var movingState = $Moving
 
 # Node for the shooting state
 onready var shootingState = $Shooting
+
+var route = null;
 
 func _physics_process(delta:float) -> void:
 	currentState.update()
@@ -33,3 +40,7 @@ func changeState(newState:int) -> void:
 
 	currentState.enter()
 
+func playerMoved(var playerPos:Vector2) -> void:
+	if currentState.has_method("playerMoved"):
+		currentState.playerMoved(playerPos)
+	pass

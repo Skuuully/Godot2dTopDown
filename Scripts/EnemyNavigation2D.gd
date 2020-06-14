@@ -16,6 +16,10 @@ func _getRouteToPlayer(from):
 	
 	return route
 
+func getRoute(var startPosition:Vector2, var targetPosition:Vector2) -> PoolVector2Array:
+	var closestPt = get_closest_point(targetPosition)
+	return get_simple_path(startPosition, closestPt)
+
 func setPlayerPosition(position):
 	# minus the parents position(room position) to get the player position 
 	# relative to the room

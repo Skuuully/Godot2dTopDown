@@ -20,13 +20,14 @@ onready var _gui = $GUI
 var dmgText = preload("res://Prefabs/DamageText.tscn")
 
 func _ready():
-	player.connect("_bulletCreated", self, "_onBulletCreated")
-	player.connect("moved", self, "_onPlayerMove")
-	player.connect("damageTaken", self, "_onPlayerDamageTaken")
+	Globals.checkError(player.connect("_bulletCreated", self, "_onBulletCreated"))
+	Globals.checkError(player.connect("moved", self, "_onPlayerMove"))
+	Globals.checkError(player.connect("damageTaken", self, "_onPlayerDamageTaken"))
+	
 	for child in get_children():
 		if (child != null) && child.has_method("isRoom"):
-			child.connect("playerExited", self, "_playerExited")
-			child.connect("playerEntered", self, "_playerEntered")
+			Globals.checkError(child.connect("playerExited", self, "_playerExited"))
+			Globals.checkError(child.connect("playerEntered", self, "_playerEntered"))
 	
 	_activeRoom.activateCamera()
 
@@ -42,7 +43,7 @@ func _onCollision(bullet, collisionPosition, other):
 # Handler for when bullets are created
 func _onBulletCreated(newBullet):
 	_bulletManager.addBullet(newBullet)
-	newBullet.connect("collision", self, "_onCollision")
+	Globals.checkError(newBullet.connect("collision", self, "_onCollision"))
 
 # Handler for when the player moves
 func _onPlayerMove(playerPosition):
@@ -55,11 +56,12 @@ func getAllBullets():
 
 func _playerExited():
 	_playerCamera.activateCamera(_activeRoom.getCameraPosition())
+	_activeRoom.deactivate()
 	pass
 
 func _playerEntered(newRoom):
 	_activeRoom = newRoom
-	_activeRoom.activateCamera()
+	_activeRoom.activate()
 	pass
 
 func _onPlayerDamageTaken() -> void:

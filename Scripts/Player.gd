@@ -6,6 +6,7 @@ class_name Player
 # Movement based stuff
 export var ACCELERATION:float = 100
 export var MAX_SPEED:float = 100
+var _velocity = Vector2(0,0)
 
 export var MAX_LIFE:int = 6;
 var _life:int = MAX_LIFE setget , getLife;
@@ -43,7 +44,7 @@ func move() -> void:
 		movement *= ACCELERATION
 		movement.x = clamp(movement.x, -MAX_SPEED, MAX_SPEED)
 		movement.y = clamp(movement.y, -MAX_SPEED, MAX_SPEED)
-		move_and_slide(movement, Vector2.UP)
+		_velocity = move_and_slide(movement, Vector2.UP)
 		emit_signal("moved", global_position)
 
 func shoot() -> void:

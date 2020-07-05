@@ -13,19 +13,19 @@ onready var _damageable:Node2D = $Damageable
 # The particles to instance on death
 var _deathParticles:PackedScene = preload("res://Prefabs/EnemyDeathParticles.tscn")
 
-signal onDeath()
+signal died()
 
 func _ready() -> void:
-	_damageable.connect("died", self, "_onDeath")
+	Globals.checkError(_damageable.connect("died", self, "_onDeath"))
 
-func _physics_process(delta) -> void:
-	_followRoute(delta)
+func _physics_process(_delta) -> void:
+	_followRoute()
 	checkCollisions()
 
 func setRoute(newRoute) -> void:
 	_route = newRoute
 
-func _followRoute(delta) -> void:
+func _followRoute() -> void:
 	if (_route != null) && (_route.size() > 0):
 		var dir:Vector2 = (_route[0] - global_position).normalized()
 		
@@ -42,7 +42,7 @@ func _followRoute(delta) -> void:
 # creates particles
 # frees body
 func _onDeath(var bullet:Bullet) -> void:
-	emit_signal("onDeath", self)
+	emit_signal("died", self)
 	var deathParticles:CPUParticles2D = _deathParticles.instance()
 	deathParticles.position = global_position;
 	get_tree().get_root().add_child(deathParticles)

@@ -72,6 +72,10 @@ config/name="Top Down"
 run/main_scene="res://Scenes/World.tscn"
 config/icon="res://Sprites/icon.png"
 
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+
 [display]
 
 window/size/width=720

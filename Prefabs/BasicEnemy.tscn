@@ -1,17 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/BasicEnemy/BasicEnemyStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/BasicEnemy/BasicEnemyIdle.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/BasicEnemy/BasicEnemyMoving.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/BasicEnemy/BasicEnemyShooting.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/BasicEnemy/BasicEnemy.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Damageable.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="BasicEnemy" type="Node"]
+[node name="BasicEnemy" type="KinematicBody2D"]
 script = ExtResource( 5 )
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
 [node name="Idle" type="Node" parent="StateMachine"]
@@ -20,10 +22,37 @@ script = ExtResource( 2 )
 [node name="Moving" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 
-[node name="Shooting" type="Node" parent="StateMachine"]
+[node name="Shooting" type="Node2D" parent="StateMachine"]
 script = ExtResource( 4 )
+BULLET_COUNT = 8
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="CenterPoint" type="Position2D" parent="StateMachine/Shooting"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="ProjSpawn" type="Position2D" parent="StateMachine/Shooting"]
+position = Vector2( 40, -40 )
+
+[node name="StateDisplay" type="RichTextLabel" parent="StateMachine"]
+visible = false
+margin_left = -48.0
+margin_top = 40.0
+margin_right = 56.0
+margin_bottom = 72.0
+text = "Not entered"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Damageable" type="Node2D" parent="."]
+script = ExtResource( 7 )

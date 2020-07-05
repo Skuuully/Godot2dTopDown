@@ -27,7 +27,7 @@ func _ready():
 	for child in get_children():
 		if (child != null) && child.has_method("isEnemy"):
 			_enemies.push_back(child)
-			child.connect("onDeath", self, "_onEnemyDeath")
+			child.connect("died", self, "_onEnemyDeath")
 	
 	# Connect to room bounds, enter and exit methods
 	bounds.connect("body_entered", self, "_bodyEntered")
@@ -73,6 +73,17 @@ func getCameraPosition():
 
 func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> PoolVector2Array:
 	return _navigation.getRoute(currentPosition, targetPosition)
+
+func activate() -> void:
+	activateCamera()
+	for enemy in _enemies:
+		if enemy.has_method("setActive"):
+			enemy.setActive(true)
+
+func deactivate() -> void:
+	for enemy in _enemies:
+		if enemy.has_method("setActive"):
+			enemy.setActive(false)
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

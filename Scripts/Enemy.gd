@@ -57,7 +57,7 @@ func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
 		if collision.collider is load("res://Scripts/Player.gd") as Script:
-			collision.collider.onDamageTaken()
+			collision.collider.damageable.takeDamageInt(1)
 	pass
 
 # Method that can be cheked for on nodes to determine if the node is an enemy

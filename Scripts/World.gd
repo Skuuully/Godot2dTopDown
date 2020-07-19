@@ -20,7 +20,6 @@ onready var _gui = $GUI
 var dmgText = preload("res://Prefabs/DamageText.tscn")
 
 func _ready():
-	Globals.checkError(player.connect("_bulletCreated", self, "_onBulletCreated"))
 	Globals.checkError(player.connect("moved", self, "_onPlayerMove"))
 	Globals.checkError(player.connect("damageTaken", self, "_onPlayerDamageTaken"))
 	
@@ -30,20 +29,6 @@ func _ready():
 			Globals.checkError(child.connect("playerEntered", self, "_playerEntered"))
 	
 	_activeRoom.activateCamera()
-
-func _onCollision(bullet, collisionPosition, other):
-	var damageText = dmgText.instance()
-	get_tree().get_root().add_child(damageText)
-	damageText.rect_position = collisionPosition
-	damageText.text = str(bullet.getDamage())
-	for node in other.get_children():
-		if node.has_method("takeDamage"):
-			node.takeDamage(bullet)
-
-# Handler for when bullets are created
-func _onBulletCreated(newBullet):
-	_bulletManager.addBullet(newBullet)
-	Globals.checkError(newBullet.connect("collision", self, "_onCollision"))
 
 # Handler for when the player moves
 func _onPlayerMove(playerPosition):

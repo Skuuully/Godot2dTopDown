@@ -9,7 +9,6 @@ export var MAX_SPEED:float = 100
 var _velocity = Vector2(0,0)
 
 export var MAX_LIFE:int = 6;
-var _life:int = MAX_LIFE setget , getLife;
 
 # Bullet based stuff
 export var BULLETSPEED:float = 120;
@@ -17,16 +16,24 @@ export var TIMEBETWEENSHOTS:float = 0.2
 export var BULLETDAMAGE:float = 1;
 var projectile:PackedScene = preload("res://Prefabs/Bullet.tscn")
 
+export var INVINCIBLE_TIME = 0.4
+
 onready var gunTimer:Timer = $GunTimer
-onready var invincibleTimer:Timer = $InvincibleTimer
 onready var collisionShape:CollisionShape2D = $CollisionShape2D
 onready var screenEffectPlayer:AnimationPlayer = $ScreenEffectPlayer
 onready var shockwave:ColorRect = $ScreenRenderLayer/Shockwave
+onready var damageable:Damageable = $Damageable
 
 # fired when player positions changes, additionally sends out new position
 signal moved()
 signal _bulletCreated(newBullet)
 signal damageTaken()
+
+func _ready() -> void:
+	damageable.setHealth(MAX_LIFE)
+	damageable.setInvincibleTime(INVINCIBLE_TIME)
+	Globals.checkError(damageable.connect("died", self, "died"))
+	Globals.checkError(damageable.connect("damageTaken", self, "_onDamageTaken"))
 
 func _physics_process(_delta) -> void:
 	move()
@@ -68,19 +75,16 @@ func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
 		if collision.collider as Enemy:
-			onDamageTaken()
+			damageable.takeDamageInt(1)
 	pass
 
-func onDamageTaken() -> void:
-	if invincibleTimer.is_stopped():
-		_life -= 1;
-		emit_signal("damageTaken")
-		if (_life <= 0):
-			died()
-		else:
-			doShockwave()
-			flash()
-			invincibleTimer.start()
+func _onDamageTaken() -> void:
+	emit_signal("damageTaken")
+	if (damageable._health <= 0):
+		died()
+	else:
+		doShockwave()
+		flash()
 
 func doShockwave() -> void:
 	# Get the top left position of the camera
@@ -94,18 +98,18 @@ func doShockwave() -> void:
 
 func flash() -> void:
 	modulate.a = 0.3
-	yield(get_tree().create_timer(invincibleTimer.wait_time / 4), "timeout")
+	yield(get_tree().create_timer(damageable.invincibleTimer.wait_time / 4), "timeout")
 	modulate.a = 1.0
-	yield(get_tree().create_timer(invincibleTimer.wait_time / 4), "timeout")
+	yield(get_tree().create_timer(damageable.invincibleTimer.wait_time / 4), "timeout")
 	modulate.a = 0.3
-	yield(get_tree().create_timer(invincibleTimer.wait_time / 4), "timeout")
+	yield(get_tree().create_timer(damageable.invincibleTimer.wait_time / 4), "timeout")
 	modulate.a = 1.0
 
 func died() -> void:
-	assert(_life <= 0)
+	assert(damageable._health <= 0)
 
 func getLife() -> int:
-	return _life;
+	return damageable._health
 
 # Method that can be cheked for on nodes to determine if the node is the player
 # node.has_method("isPlayer") will return true, the method need not do anything

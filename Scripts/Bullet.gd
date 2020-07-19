@@ -6,8 +6,6 @@ class_name Bullet
 signal collision()
 
 var _lastFrameLinearVelocity = Vector2(0, 0) setget , getLastFrameLinearVelocity
-# Tracks the bodies from previous frame
-var _bodies
 
 # The damage value that the bullet will hold 
 var _damage setget setDamage, getDamage
@@ -16,15 +14,17 @@ var _collisionParticles = preload("res://Prefabs/BulletCollisionParticles.tscn")
 
 var _creator:Node2D setget setCreator, getCreator
 
+func _ready() -> void:
+	BulletManager.addBullet(self)
+
 func _physics_process(_delta):
 	var newBodies:Array = get_colliding_bodies()
 	for body in newBodies:
 		createParticles()
-		if body.is_in_group("Damageable") && (_bodies != null) && !(body in _bodies):
+		if body.has_node("Damageable") && (body != _creator):
 			emit_signal("collision", self, position, body)
 			queue_free()
 	
-	_bodies = newBodies
 	_lastFrameLinearVelocity = linear_velocity
 
 func setDamage(var dmg):

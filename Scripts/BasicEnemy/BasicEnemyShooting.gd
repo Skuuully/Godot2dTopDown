@@ -38,7 +38,6 @@ func _createProjectiles() -> void:
 		_createProj(vel, pos)
 
 func _createProj(velocity:Vector2, position:Vector2) -> void:
-	print("Creating proj at position: " + str(position))
 	var bulletInstance:Bullet = bullet.instance()
 	bulletInstance.setCreator(_stateMachine.get_parent())
 	bulletInstance.setDamage(BULLET_DMG)

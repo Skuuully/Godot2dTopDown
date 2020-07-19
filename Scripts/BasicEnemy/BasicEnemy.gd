@@ -35,13 +35,12 @@ func getRandCircularPoint():
 		var normalized = Vector2(x, y).normalized()
 		var includeRange = normalized * MOVE_RANGE
 		var target:Vector2 = Vector2(global_position.x + includeRange.x, global_position.y + includeRange.y)
-		print("target: " + str(target))
 		route = room.calculateRoute(global_position, target)
 	
 	return route
 
 func _onDeath(_bullet:Bullet) -> void:
-	emit_signal("died")
+	emit_signal("died", self)
 	queue_free()
 
 func setActive(newActive:bool) -> void:

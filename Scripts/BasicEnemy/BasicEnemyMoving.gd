@@ -8,7 +8,7 @@ var NEAR_POINT:int = 5
 
 func enter() -> void:
 	# Change the animation state to moving
-	if _route != null:
+	if _route == null:
 		_findRoute()
 
 func update() -> void:

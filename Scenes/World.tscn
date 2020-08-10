@@ -54,7 +54,7 @@ margin_right = -8.0
 margin_bottom = -32.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 272, 56 )
+position = Vector2( 288, -112 )
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -63,6 +63,7 @@ script = ExtResource( 7 )
 script = ExtResource( 5 )
 
 [node name="StartRoom" type="Node2D" parent="."]
+position = Vector2( 0, -192 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
@@ -95,14 +96,12 @@ __meta__ = {
 visible = false
 navpoly = SubResource( 3 )
 
-[node name="BasicEnemy" parent="StartRoom" groups=[
-"Damageable",
-] instance=ExtResource( 10 )]
+[node name="BasicEnemy" parent="StartRoom" instance=ExtResource( 10 )]
 position = Vector2( 144, 128 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="WorldMap" type="Node2D" parent="."]
-position = Vector2( -328, -208 )
+position = Vector2( 96, -40 )
 script = ExtResource( 11 )
 rows = 3
 cols = 3

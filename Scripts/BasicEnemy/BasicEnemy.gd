@@ -34,8 +34,10 @@ func getRandCircularPoint():
 		var y:float = rng.randf_range(-1, 1) * MOVE_RANGE
 		var normalized = Vector2(x, y).normalized()
 		var includeRange = normalized * MOVE_RANGE
-		var target:Vector2 = Vector2(global_position.x + includeRange.x, global_position.y + includeRange.y)
-		route = room.calculateRoute(global_position, target)
+		var target:Vector2 = \
+		Vector2(position.x + includeRange.x, position.y + includeRange.y)
+		route = room.calculateRoute(position, target)
+		pass
 	
 	return route
 

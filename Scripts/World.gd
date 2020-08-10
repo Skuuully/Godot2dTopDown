@@ -15,13 +15,15 @@ onready var _bulletManager = $BulletManager
 onready var _activeRoom = $StartRoom
 
 onready var _gui = $GUI
+onready var worldMap = $WorldMap
 
 # The text to instantiate when a bullet collides
 var dmgText = preload("res://Prefabs/DamageText.tscn")
 
 func _ready():
 	Globals.checkError(player.connect("moved", self, "_onPlayerMove"))
-	Globals.checkError(player.connect("damageTaken", self, "_onPlayerDamageTaken"))
+	Globals.checkError(player.damageable.connect("damageTaken", self, "_onPlayerDamageTaken"))
+	Globals.checkError(worldMap.connect("roomAdded", self, "_onRoomAdded"))
 	
 	for child in get_children():
 		if (child != null) && child.has_method("isRoom"):
@@ -52,3 +54,7 @@ func _playerEntered(newRoom):
 func _onPlayerDamageTaken() -> void:
 	_gui.updateLife(player.getLife(), player.MAX_LIFE)
 	pass
+
+func _onRoomAdded(room:Room) -> void:
+	Globals.checkError(room.connect("playerExited", self, "_playerExited"))
+	Globals.checkError(room.connect("playerEntered", self, "_playerEntered"))

@@ -27,7 +27,6 @@ onready var damageable:Damageable = $Damageable
 # fired when player positions changes, additionally sends out new position
 signal moved()
 signal _bulletCreated(newBullet)
-signal damageTaken()
 
 func _ready() -> void:
 	damageable.setHealth(MAX_LIFE)
@@ -79,12 +78,8 @@ func checkCollisions() -> void:
 	pass
 
 func _onDamageTaken() -> void:
-	emit_signal("damageTaken")
-	if (damageable._health <= 0):
-		died()
-	else:
-		doShockwave()
-		flash()
+	doShockwave()
+	flash()
 
 func doShockwave() -> void:
 	# Get the top left position of the camera
@@ -105,7 +100,7 @@ func flash() -> void:
 	yield(get_tree().create_timer(damageable.invincibleTimer.wait_time / 4), "timeout")
 	modulate.a = 1.0
 
-func died() -> void:
+func died(var _direction:Vector2) -> void:
 	assert(damageable._health <= 0)
 
 func getLife() -> int:

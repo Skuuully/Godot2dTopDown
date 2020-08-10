@@ -18,18 +18,18 @@ func takeDamage(var bullet:Bullet) -> void:
 	if invincibleTimer.is_stopped():
 		_health -= bullet.getDamage()
 		if _health <= 0:
-			emit_signal("died", bullet)
+			emit_signal("died", bullet.getLastFrameLinearVelocity())
 		else:
 			emit_signal("damageTaken")
 			invincibleTimer.start()
 
 func takeDamageInt(var damage:int) -> void:
-	if invincibleTimer.is_stopped():
+	if invincibleTimer.is_stopped() && _health > 0:
 		_health -= damage
+		emit_signal("damageTaken")
 		if _health <= 0:
-			emit_signal("died")
+			emit_signal("died", Vector2(0, 0))
 		else:
-			emit_signal("damageTaken")
 			invincibleTimer.start()
 
 func setHealth(var health:int) -> void:

@@ -41,14 +41,14 @@ func _followRoute() -> void:
 # Handler for the damageables died event
 # creates particles
 # frees body
-func _onDeath(var bullet:Bullet) -> void:
+func _onDeath(var direction:Vector2) -> void:
 	emit_signal("died", self)
 	var deathParticles:CPUParticles2D = _deathParticles.instance()
 	deathParticles.position = global_position;
 	get_tree().get_root().add_child(deathParticles)
 	deathParticles.emitting = true;
 	# Rotation should be set to opposite the bullet that collided with it
-	deathParticles.rotation = bullet.getLastFrameLinearVelocity().angle() + 90
+	deathParticles.rotation = direction.angle() + 90
 	
 	# After particles created and added remove enemy
 	queue_free()

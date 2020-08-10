@@ -39,7 +39,7 @@ func getRandCircularPoint():
 	
 	return route
 
-func _onDeath(_bullet:Bullet) -> void:
+func _onDeath(_direction:Vector2) -> void:
 	emit_signal("died", self)
 	queue_free()
 

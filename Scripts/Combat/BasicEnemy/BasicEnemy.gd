@@ -13,7 +13,7 @@ var active:bool = false setget setActive
 onready var damageable = $Damageable
 
 func _ready() -> void:
-	 Globals.checkError(damageable.connect("died", self, "_onDeath"))
+	 Utils.checkError(damageable.connect("died", self, "_onDeath"))
 
 func setPlayerPosition(var playerPosition:Vector2) -> void:
 	_targetPosition = playerPosition

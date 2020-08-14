@@ -7,14 +7,14 @@ signal stateChanged(pos, state)
 
 enum State {EMPTY, HOVER, EMPTY_ROOM, ENEMY_ROOM}
 var currState = State.EMPTY
-var hoverTexture:Texture = preload("../Sprites/MapIcons/Hover.png")
-var emptyTexture:Texture = preload("../Sprites/MapIcons/EmptyRoom.png")
-var emptyRoomTexture:Texture = preload("../Sprites/icon.png")
-var enemyRoomTexture:Texture = preload("../Sprites/MapIcons/EnemyRoom.png")
+var hoverTexture:Texture = preload("res://Sprites/UI/MapIcons/Hover.png")
+export var emptyTexture:Texture = preload("res://Sprites/UI/MapIcons/EmptyRoom.png")
+export var emptyRoomTexture:Texture = preload("res://Sprites/UI/MapIcons/EmptyRoom.png")
+export var enemyRoomTexture:Texture = preload("res://Sprites/UI/MapIcons/EnemyRoom.png")
 
 func _ready():
-	Globals.checkError(self.connect("mouse_entered", self, "mouse_entered"))
-	Globals.checkError(self.connect("mouse_exited", self, "mouse_exited"))
+	Utils.checkError(self.connect("mouse_entered", self, "mouse_entered"))
+	Utils.checkError(self.connect("mouse_exited", self, "mouse_exited"))
 
 func changeState(newState) -> void:
 	currState = newState

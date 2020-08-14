@@ -16,7 +16,7 @@ var _deathParticles:PackedScene = preload("res://Prefabs/EnemyDeathParticles.tsc
 signal died()
 
 func _ready() -> void:
-	Globals.checkError(_damageable.connect("died", self, "_onDeath"))
+	Utils.checkError(_damageable.connect("died", self, "_onDeath"))
 
 func _physics_process(_delta) -> void:
 	_followRoute()
@@ -56,7 +56,7 @@ func _onDeath(var direction:Vector2) -> void:
 func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
-		if collision.collider is load("res://Scripts/Player.gd") as Script:
+		if collision.collider.has_method("isPlayer"):
 			collision.collider.damageable.takeDamageInt(1)
 	pass
 

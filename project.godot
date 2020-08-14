@@ -12,67 +12,77 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "BasicEnemy",
 "language": "GDScript",
-"path": "res://Scripts/BasicEnemy/BasicEnemy.gd"
+"path": "res://Scripts/Combat/BasicEnemy/BasicEnemy.gd"
 }, {
 "base": "BasicEnemyState",
 "class": "BasicEnemyIdle",
 "language": "GDScript",
-"path": "res://Scripts/BasicEnemy/BasicEnemyIdle.gd"
+"path": "res://Scripts/Combat/BasicEnemy/BasicEnemyIdle.gd"
 }, {
 "base": "BasicEnemyState",
 "class": "BasicEnemyMoving",
 "language": "GDScript",
-"path": "res://Scripts/BasicEnemy/BasicEnemyMoving.gd"
+"path": "res://Scripts/Combat/BasicEnemy/BasicEnemyMoving.gd"
 }, {
 "base": "Node",
 "class": "BasicEnemyState",
 "language": "GDScript",
-"path": "res://Scripts/BasicEnemy/BasicEnemyState.gd"
+"path": "res://Scripts/Combat/BasicEnemy/BasicEnemyState.gd"
 }, {
 "base": "Node",
 "class": "BasicEnemyStateMachine",
 "language": "GDScript",
-"path": "res://Scripts/BasicEnemy/BasicEnemyStateMachine.gd"
+"path": "res://Scripts/Combat/BasicEnemy/BasicEnemyStateMachine.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Scripts/Bullet.gd"
+"path": "res://Scripts/Combat/Bullet/Bullet.gd"
 }, {
 "base": "Node2D",
 "class": "Damageable",
 "language": "GDScript",
-"path": "res://Scripts/Damageable.gd"
+"path": "res://Scripts/Combat/Damageable.gd"
+}, {
+"base": "Node2D",
+"class": "Door",
+"language": "GDScript",
+"path": "res://Scripts/World/Room/Door.gd"
+}, {
+"base": "Node2D",
+"class": "Doors",
+"language": "GDScript",
+"path": "res://Scripts/World/Room/Doors.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Scripts/Enemy.gd"
+"path": "res://Scripts/Combat/Enemy/Enemy.gd"
 }, {
 "base": "GridContainer",
 "class": "MapContainer",
 "language": "GDScript",
-"path": "res://Scripts/MapContainer.gd"
+"path": "res://Scripts/UI/Map/MapContainer.gd"
 }, {
 "base": "TextureRect",
 "class": "MapElement",
 "language": "GDScript",
-"path": "res://Scripts/MapElement.gd"
+"path": "res://Scripts/UI/Map/MapElement.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scripts/Player.gd"
+"path": "res://Scripts/Player/Player.gd"
 }, {
 "base": "Node2D",
 "class": "Room",
 "language": "GDScript",
-"path": "res://Scripts/Room.gd"
+"path": "res://Scripts/World/Room/Room.gd"
 }, {
 "base": "Node2D",
 "class": "WorldMap",
 "language": "GDScript",
-"path": "res://Scripts/WorldMap.gd"
+"path": "res://Scripts/UI/Map/WorldMap.gd"
 } ]
 _global_script_class_icons={
 "BasicEnemy": "",
@@ -82,6 +92,8 @@ _global_script_class_icons={
 "BasicEnemyStateMachine": "",
 "Bullet": "",
 "Damageable": "",
+"Door": "",
+"Doors": "",
 "Enemy": "",
 "MapContainer": "",
 "MapElement": "",
@@ -98,8 +110,9 @@ config/icon="res://Sprites/icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/Globals.gd"
-BulletManager="*res://Scripts/BulletManager.gd"
+Utils="*res://Scripts/Singletons/Utils.gd"
+BulletManager="*res://Scripts/Singletons/BulletManager.gd"
+GlobalNodes="*res://Scripts/Singletons/GlobalNodes.gd"
 
 [display]
 

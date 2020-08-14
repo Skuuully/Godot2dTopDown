@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/EnemyRoom.png-0966ca44b5e655d78759115e1ee1cfe3.stex"
+path="res://.import/Hover.png-6dd3bf33eaf4d8f3ade096a731f13ad2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MapIcons/EnemyRoom.png"
-dest_files=[ "res://.import/EnemyRoom.png-0966ca44b5e655d78759115e1ee1cfe3.stex" ]
+source_file="res://Sprites/UI/MapIcons/Hover.png"
+dest_files=[ "res://.import/Hover.png-6dd3bf33eaf4d8f3ade096a731f13ad2.stex" ]
 
 [params]
 

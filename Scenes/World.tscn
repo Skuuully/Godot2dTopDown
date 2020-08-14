@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scripts/World.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/World/World.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/EnemyNavigation2D.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/PlayerCamera.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Room.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/BulletManager.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Combat/Enemy/EnemyNavigation2D.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Player/PlayerCamera.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/World/Room/Room.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Singletons/BulletManager.gd" type="Script" id=7]
 [ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Prefabs/BasicEnemy.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scripts/WorldMap.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/UI/Map/WorldMap.gd" type="Script" id=11]
+[ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/World/Room/Doors.gd" type="Script" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Dungeon_Tileset.png 0"
@@ -65,9 +66,6 @@ script = ExtResource( 5 )
 [node name="StartRoom" type="Node2D" parent="."]
 position = Vector2( 0, -192 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="TileMap" type="TileMap" parent="StartRoom"]
 z_index = -1
@@ -96,9 +94,11 @@ __meta__ = {
 visible = false
 navpoly = SubResource( 3 )
 
-[node name="BasicEnemy" parent="StartRoom" instance=ExtResource( 10 )]
-position = Vector2( 144, 128 )
-scale = Vector2( 0.2, 0.2 )
+[node name="Doors" type="Node2D" parent="StartRoom"]
+script = ExtResource( 13 )
+
+[node name="Door" parent="StartRoom/Doors" instance=ExtResource( 12 )]
+doorDirection = 1
 
 [node name="WorldMap" type="Node2D" parent="."]
 position = Vector2( 96, -40 )

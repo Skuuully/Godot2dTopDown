@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/EnemyNavigation2D.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Combat/Enemy/EnemyNavigation2D.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/BasicEnemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Room.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/World/Room/Room.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/World/Room/Doors.gd" type="Script" id=6]
+[ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 16, 16, 336, 16, 336, 160, 16, 160 )
@@ -48,21 +50,6 @@ __meta__ = {
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 
-[node name="Enemy5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 96, 72 )
-
-[node name="Enemy6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 176, 128 )
-
-[node name="Enemy4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 168, 16 )
-
-[node name="Enemy2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 224, 128 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 272, 80 )
-
 [node name="RoomNavigation" type="Navigation2D" parent="."]
 script = ExtResource( 1 )
 
@@ -89,3 +76,24 @@ tile_data = PoolIntArray( 65535, 0, 393223, 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 
 [node name="BasicEnemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 56, 128 )
 scale = Vector2( 0.2, 0.2 )
+
+[node name="Doors" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="Door" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 192, 8 )
+
+[node name="Door2" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 192, 168 )
+rotation = -3.14159
+doorDirection = 1
+
+[node name="Door3" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 344, 88 )
+rotation = 1.5708
+doorDirection = 3
+
+[node name="Door4" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 8, 88 )
+rotation = -1.5708
+doorDirection = 2

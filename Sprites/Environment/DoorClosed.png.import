@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Over.png-e3d279c15a165460dd15d55fe514c28e.stex"
+path="res://.import/DoorClosed.png-f118650d97f7f501957e4832b4d75f50.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Over.png"
-dest_files=[ "res://.import/Over.png-e3d279c15a165460dd15d55fe514c28e.stex" ]
+source_file="res://Sprites/Environment/DoorClosed.png"
+dest_files=[ "res://.import/DoorClosed.png-f118650d97f7f501957e4832b4d75f50.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

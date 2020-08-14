@@ -31,8 +31,8 @@ signal _bulletCreated(newBullet)
 func _ready() -> void:
 	damageable.setHealth(MAX_LIFE)
 	damageable.setInvincibleTime(INVINCIBLE_TIME)
-	Globals.checkError(damageable.connect("died", self, "died"))
-	Globals.checkError(damageable.connect("damageTaken", self, "_onDamageTaken"))
+	Utils.checkError(damageable.connect("died", self, "died"))
+	Utils.checkError(damageable.connect("damageTaken", self, "_onDamageTaken"))
 
 func _physics_process(_delta) -> void:
 	move()
@@ -73,7 +73,7 @@ func createProj() -> void:
 func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
-		if collision.collider as Enemy:
+		if collision.collider.has_method("isEnemy"):
 			damageable.takeDamageInt(1)
 	pass
 

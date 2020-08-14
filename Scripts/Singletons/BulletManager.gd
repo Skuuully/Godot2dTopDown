@@ -9,7 +9,7 @@ func getAllBullets():
 
 func addBullet(bullet:Bullet):
 	_bullets.push_back(bullet)
-	Globals.checkError(bullet.connect("collision", self, "_onCollision"))
+	Utils.checkError(bullet.connect("collision", self, "_onCollision"))
 
 func _removeBullet(bullet):
 	_bullets.erase(bullet)

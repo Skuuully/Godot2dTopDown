@@ -15,8 +15,13 @@ onready var _camera = $RoomCamera
 # The bounds of the room
 onready var bounds = $RoomBounds
 
+# Rooms doors
+onready var doors = $Doors
+
 # The enemies in the room
 var _enemies = Array()
+
+var gridPosition:Vector2 = Vector2(0, 0)
 
 signal playerExited()
 signal playerEntered()
@@ -67,6 +72,8 @@ func _bodyExited(body):
 # Handler for enemy on death
 func _onEnemyDeath(enemy):
 	_enemies.erase(enemy)
+	if _enemies.size() < 1:
+		roomCleared()
 
 func getCameraPosition():
 	return _camera.position
@@ -76,14 +83,20 @@ func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> 
 
 func activate() -> void:
 	activateCamera()
-	for enemy in _enemies:
-		if enemy.has_method("setActive"):
-			enemy.setActive(true)
+	if _enemies.size() > 0:
+		doors.close()
+		for enemy in _enemies:
+			if enemy.has_method("setActive"):
+				enemy.setActive(true)
 
 func deactivate() -> void:
 	for enemy in _enemies:
 		if enemy.has_method("setActive"):
 			enemy.setActive(false)
+
+func roomCleared() -> void:
+	doors.open()
+	pass
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

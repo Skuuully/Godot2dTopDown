@@ -21,14 +21,14 @@ onready var worldMap = $WorldMap
 var dmgText = preload("res://Prefabs/DamageText.tscn")
 
 func _ready():
-	Globals.checkError(player.connect("moved", self, "_onPlayerMove"))
-	Globals.checkError(player.damageable.connect("damageTaken", self, "_onPlayerDamageTaken"))
-	Globals.checkError(worldMap.connect("roomAdded", self, "_onRoomAdded"))
+	Utils.checkError(player.connect("moved", self, "_onPlayerMove"))
+	Utils.checkError(player.damageable.connect("damageTaken", self, "_onPlayerDamageTaken"))
+	Utils.checkError(worldMap.connect("roomAdded", self, "_onRoomAdded"))
 	
 	for child in get_children():
 		if (child != null) && child.has_method("isRoom"):
-			Globals.checkError(child.connect("playerExited", self, "_playerExited"))
-			Globals.checkError(child.connect("playerEntered", self, "_playerEntered"))
+			Utils.checkError(child.connect("playerExited", self, "_playerExited"))
+			Utils.checkError(child.connect("playerEntered", self, "_playerEntered"))
 	
 	_activeRoom.activateCamera()
 
@@ -56,5 +56,5 @@ func _onPlayerDamageTaken() -> void:
 	pass
 
 func _onRoomAdded(room:Room) -> void:
-	Globals.checkError(room.connect("playerExited", self, "_playerExited"))
-	Globals.checkError(room.connect("playerEntered", self, "_playerEntered"))
+	Utils.checkError(room.connect("playerExited", self, "_playerExited"))
+	Utils.checkError(room.connect("playerEntered", self, "_playerEntered"))

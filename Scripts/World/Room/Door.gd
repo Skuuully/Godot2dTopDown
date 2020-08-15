@@ -32,9 +32,7 @@ func close() -> void:
 		isOpen = false
 
 func _onBodyEnter(body) -> void:
-	print ("body entered")
 	if isOpen && (body is Player):
-		print ("player body entered")
 		teleportPlayer()
 
 # @param _instance the room that was added
@@ -85,4 +83,5 @@ func setupExitLocation(adjacentRoom:Node) -> void:
 
 func teleportPlayer() -> void:
 	GlobalNodes.getPlayer().global_position = pairedDoor.entryPosition.global_position
+	pairedDoor.get_parent().get_parent().activate()
 	pass

@@ -55,12 +55,20 @@ func playerMoved(position):
 				enemy.setRoute(_navigation._getRouteToPlayer(enemy.global_position))
 			elif enemy.has_method("setPlayerPosition"):
 				enemy.setPlayerPosition(position)
+		
+		# SFI: This is probably really expensive for how much it will be called
+		# Should be handled by _bodyEntered and _bodyExited however sadly they 
+		# are fired in the wrong order on teleporting the player through the 
+		# doors
+		if bounds.overlaps_body(GlobalNodes.getPlayer()):
+			print("overlapping")
+			activate()
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
+	print("body entered room")
 	if body.has_method("isPlayer"):
-		currentState = state.ACTIVE
-		_camera.current = true
+		activateCamera()
 		emit_signal("playerEntered", self)
 
 # Handler for room bounds body exited method
@@ -96,7 +104,6 @@ func deactivate() -> void:
 
 func roomCleared() -> void:
 	doors.open()
-	pass
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

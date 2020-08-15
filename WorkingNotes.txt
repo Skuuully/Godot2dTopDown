@@ -15,6 +15,9 @@ Mellee that deflects enemy bullets
 
 
 Progress:
+14/08/20
+Introduced doors that pair up to other doors, facilitates movement between rooms, close behind on entering enemy room
+
 10/08/20
 Most basic of map systems implemented, new grid that can be clicked in which instances a room at a given position, rooms overlap with current existing, no way to know which room you are in
 

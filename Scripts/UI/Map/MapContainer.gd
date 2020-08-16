@@ -9,7 +9,7 @@ func getPosition(node:Node) -> Vector2:
 		for child in self.get_children():
 			i += 1
 			if node == child:
-				var col = i / self.columns
+				var col = floor(i as float / self.columns as float)
 				var row = i % self.columns
 				return Vector2(row, col)
 	

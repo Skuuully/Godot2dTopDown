@@ -51,6 +51,6 @@ func changeState(newState:int) -> void:
 	if currentState.has_method("enter"):
 		currentState.enter()
 
-func playerMoved(var playerPos:Vector2) -> void:
+func playerMoved(var _playerPos:Vector2) -> void:
 	if currentState.has_method("playerMoved"):
 		currentState.playerMoved()

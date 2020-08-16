@@ -24,6 +24,8 @@ func _physics_process(_delta):
 		if body.has_node("Damageable") && (body != _creator):
 			emit_signal("collision", self, position, body)
 			queue_free()
+		else:
+			queue_free()
 	
 	_lastFrameLinearVelocity = linear_velocity
 

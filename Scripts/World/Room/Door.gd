@@ -1,4 +1,5 @@
 # Door
+tool
 extends Node2D
 class_name Door
 
@@ -10,10 +11,11 @@ var pairedDoor = null
 
 onready var sprite = $Sprite
 onready var exitArea = $ExitArea
+onready var collisionShape = $CollisionArea/CollisionShape2D
 onready var entryPosition:Position2D = $EntryPosition
 
 enum doorFacing {UP, DOWN, LEFT, RIGHT}
-export(doorFacing) var doorDirection = doorFacing.UP
+export(doorFacing) var doorDirection = doorFacing.UP setget setDoorFacing
 
 func _ready():
 	sprite.texture = textureClosed
@@ -25,11 +27,13 @@ func open() -> void:
 	if !isOpen && pairedDoor != null:
 		sprite.texture = textureOpen
 		isOpen = true
+		collisionShape.disabled = true
 
 func close() -> void:
 	if isOpen:
 		sprite.texture = textureClosed
 		isOpen = false
+		collisionShape.disabled = false
 
 func _onBodyEnter(body) -> void:
 	if isOpen && (body is Player):
@@ -84,4 +88,17 @@ func setupExitLocation(adjacentRoom:Node) -> void:
 func teleportPlayer() -> void:
 	GlobalNodes.getPlayer().global_position = pairedDoor.entryPosition.global_position
 	pairedDoor.get_parent().get_parent().activate()
-	pass
+
+# setter for doorFacing, allows changing value in editor to reflect in the room
+# instantly
+func setDoorFacing(newDoorDirection) -> void:
+	doorDirection = newDoorDirection 
+	match(doorDirection):
+		doorFacing.UP:
+			rotation_degrees = 0
+		doorFacing.DOWN:
+			rotation_degrees = 180
+		doorFacing.LEFT:
+			rotation_degrees = -90
+		doorFacing.RIGHT:
+			rotation_degrees = 90

@@ -1,4 +1,4 @@
-extends Node
+extends EnemyStateMachine
 class_name BasicEnemyStateMachine
 
 # Different states for the state machine
@@ -54,4 +54,3 @@ func changeState(newState:int) -> void:
 func playerMoved(var playerPos:Vector2) -> void:
 	if currentState.has_method("playerMoved"):
 		currentState.playerMoved()
-	pass

@@ -18,7 +18,7 @@ export(doorFacing) var doorDirection = doorFacing.UP
 func _ready():
 	sprite.texture = textureClosed
 	exitArea.connect("body_entered", self, "_onBodyEnter")
-	GlobalNodes.getWorldMap().connect("roomAdded", self, "_onRoomAdded")
+	Utils.checkError(GlobalNodes.getWorldMap().connect("roomAdded", self, "_onRoomAdded"))
 	pass
 
 func open() -> void:

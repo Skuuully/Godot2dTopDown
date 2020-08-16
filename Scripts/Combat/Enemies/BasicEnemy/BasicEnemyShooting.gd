@@ -1,6 +1,6 @@
-extends BasicEnemyState
+extends EnemyState
 
-var bullet = preload("res://Prefabs/Bullet.tscn")
+var bullet = preload("res://Prefabs/Combat/Bullet.tscn")
 export var BULLET_DMG:int = 1
 export var BULLET_COUNT:int = 4
 export var BULLET_SPEED:int = 120

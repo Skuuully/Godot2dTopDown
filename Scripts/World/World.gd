@@ -18,7 +18,7 @@ onready var _gui = $GUI
 onready var worldMap = $WorldMap
 
 # The text to instantiate when a bullet collides
-var dmgText = preload("res://Prefabs/DamageText.tscn")
+var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
 
 func _ready():
 	Utils.checkError(player.connect("moved", self, "_onPlayerMove"))

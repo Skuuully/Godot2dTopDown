@@ -25,3 +25,6 @@ func getWorldMap() -> WorldMap:
 
 func getPlayer() -> Player:
 	return getNode("Player") as Player
+
+func getGUI() -> Node:
+	return getNode("GUI")

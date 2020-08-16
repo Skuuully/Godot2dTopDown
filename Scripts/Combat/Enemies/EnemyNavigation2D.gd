@@ -4,7 +4,7 @@ extends Navigation2D
 
 var _playerPosition setget setPlayerPosition
 
-func _getRouteToPlayer(from):
+func getRouteToPlayer(from):
 	return convertToGlobal(get_simple_path(from, _playerPosition))
 
 func getRoute(var startPosition:Vector2, var targetPosition:Vector2) -> PoolVector2Array:

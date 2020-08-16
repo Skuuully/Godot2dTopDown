@@ -1,0 +1,24 @@
+Ideas
+
+"Map Inventory"
+- Display only in cleared rooms, unnecessary info during combat
+- Bar of pickupable "maps" that may be placed in the ui map to create rooms
+- The items in the hotbar should show info about the type of rooms
+e.g.
+Room type (enemy, heal, treasure)
+Room difficulty (Based on number/enemy difficulty)
+Reward level?
+Augments (add special border if augmented, hover over for tooltip with details)
+- Should have some way to dispose of maps without dropping back on floor
+- Carry limit
+
+
+Map Augment Ideas:
+Enemies deal double damage, room completion guarentees at least
+
+
+Augment Table:
+Can be used on 1 map
+Allows choice between 3 augments, then re roll available augments x times
+Destroy on use
+UI can be integrated, no need to open menu.

@@ -1,7 +1,7 @@
 extends Node2D
 # class_name BulletManager Singleton
 
-var dmgText = preload("res://Prefabs/DamageText.tscn")
+var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
 var _bullets = Array() setget ,getAllBullets
 
 func getAllBullets():

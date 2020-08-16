@@ -10,7 +10,7 @@ var _lastFrameLinearVelocity = Vector2(0, 0) setget , getLastFrameLinearVelocity
 # The damage value that the bullet will hold 
 var _damage setget setDamage, getDamage
 
-var _collisionParticles = preload("res://Prefabs/BulletCollisionParticles.tscn")
+var _collisionParticles = preload("res://Prefabs/Combat/BulletCollisionParticles.tscn")
 
 var _creator:Node2D setget setCreator, getCreator
 

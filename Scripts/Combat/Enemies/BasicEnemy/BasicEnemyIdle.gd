@@ -1,4 +1,4 @@
-extends BasicEnemyState
+extends EnemyState
 class_name BasicEnemyIdle
 
 func enter() -> void:

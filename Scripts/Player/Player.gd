@@ -14,7 +14,7 @@ export var MAX_LIFE:int = 6;
 export var BULLETSPEED:float = 120;
 export var TIMEBETWEENSHOTS:float = 0.2
 export var BULLETDAMAGE:float = 1;
-var projectile:PackedScene = preload("res://Prefabs/Bullet.tscn")
+var projectile:PackedScene = preload("res://Prefabs/Combat/Bullet.tscn")
 
 export var INVINCIBLE_TIME = 0.4
 

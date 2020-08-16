@@ -1,10 +1,10 @@
-extends BasicEnemyState
-class_name BasicEnemyMoving
+extends EnemyState
+class_name FollowPlayerEnemyFollowState
+
+var routeToPlayer = null
 
 var _route = null
-var _targetArea:Rect2 = Rect2(0, 0, 0, 0)
 var MOVE_SPEED:int = 20
-var NEAR_POINT:int = 5
 
 func enter() -> void:
 	# Change the animation state to moving
@@ -30,7 +30,7 @@ func _followRoute() -> void:
 		var moveAmount:Vector2 = dir * MOVE_SPEED
 		kinematicNode.move_and_slide(moveAmount)
 		
-		if _targetArea.has_point(kinematicNode.global_position):
+		if _route[0] == kinematicNode.global_position:
 			_route.remove(0)
 			if _route.size() < 1:
 				# At end of route now transition to shoot
@@ -41,12 +41,8 @@ func _findRoute() -> void:
 	# The base enemy node
 	var baseNode = _stateMachine.get_parent()
 	if baseNode != null:
-		var base:BasicEnemy = baseNode as BasicEnemy
-		setRoute(base.getRandCircularPoint())
+		var base:FollowPlayerEnemy = baseNode as FollowPlayerEnemy
+		_route = base.getRouteToPlayer()
 
-func setRoute(var route:PoolVector2Array) -> void:
-	_route = route
-	if route != null && route.size() > 0:
-		var lastPoint = route[route.size() - 1]
-		var targetTopLeft = Vector2(lastPoint.x - (NEAR_POINT/2.0), lastPoint.y - (NEAR_POINT/2.0))
-		_targetArea = Rect2(targetTopLeft, Vector2(NEAR_POINT, NEAR_POINT))
+func playerMoved() -> void:
+	_findRoute()

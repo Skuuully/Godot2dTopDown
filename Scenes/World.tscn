@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Combat/Enemy/EnemyNavigation2D.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Combat/Enemies/EnemyNavigation2D.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Player/PlayerCamera.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/World/Room/Room.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Singletons/BulletManager.gd" type="Script" id=7]
@@ -55,7 +55,7 @@ margin_right = -8.0
 margin_bottom = -32.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, -112 )
+position = Vector2( 280, -72 )
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource( 7 )

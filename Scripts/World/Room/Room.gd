@@ -52,7 +52,7 @@ func playerMoved(position):
 	
 		for enemy in _enemies:
 			if enemy.has_method("setRoute"):
-				enemy.setRoute(_navigation._getRouteToPlayer(enemy.global_position))
+				enemy.setRoute(_navigation.getRouteToPlayer(enemy.global_position))
 			elif enemy.has_method("setPlayerPosition"):
 				enemy.setPlayerPosition(position)
 		
@@ -61,12 +61,10 @@ func playerMoved(position):
 		# are fired in the wrong order on teleporting the player through the 
 		# doors
 		if bounds.overlaps_body(GlobalNodes.getPlayer()):
-			print("overlapping")
 			activate()
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
-	print("body entered room")
 	if body.has_method("isPlayer"):
 		activateCamera()
 		emit_signal("playerEntered", self)
@@ -86,12 +84,17 @@ func _onEnemyDeath(enemy):
 func getCameraPosition():
 	return _camera.position
 
+# @param currentPosition The current position to go from in local space to the room
+func getRouteToPlayer(var currentPosition:Vector2):
+	return _navigation.getRouteToPlayer(currentPosition)
+
 func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> PoolVector2Array:
 	return _navigation.getRoute(currentPosition, targetPosition)
 
 func activate() -> void:
 	activateCamera()
 	if _enemies.size() > 0:
+		GlobalNodes.getGUI().hideNonCombat()
 		doors.close()
 		for enemy in _enemies:
 			if enemy.has_method("setActive"):
@@ -104,6 +107,7 @@ func deactivate() -> void:
 
 func roomCleared() -> void:
 	doors.open()
+	GlobalNodes.getGUI().showNonCombat()
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

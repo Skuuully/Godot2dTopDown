@@ -1,9 +1,9 @@
 extends Node
-class_name BasicEnemyState
+class_name EnemyState
 
 # Will be of type BasicEnemyStateMachine cannot statically type as will cause cyclic
 # dependancy
-var _stateMachine:BasicEnemyStateMachine = get_parent()
+var _stateMachine:EnemyStateMachine = get_parent()
 
 func _ready() -> void:
 	_stateMachine = get_parent()

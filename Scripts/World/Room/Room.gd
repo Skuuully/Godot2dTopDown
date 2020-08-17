@@ -55,13 +55,6 @@ func playerMoved(position):
 				enemy.setRoute(_navigation.getRouteToPlayer(enemy.global_position))
 			elif enemy.has_method("setPlayerPosition"):
 				enemy.setPlayerPosition(position)
-		
-		# SFI: This is probably really expensive for how much it will be called
-		# Should be handled by _bodyEntered and _bodyExited however sadly they 
-		# are fired in the wrong order on teleporting the player through the 
-		# doors
-		if bounds.overlaps_body(GlobalNodes.getPlayer()):
-			activate()
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
@@ -99,6 +92,7 @@ func activate() -> void:
 		for enemy in _enemies:
 			if enemy.has_method("setActive"):
 				enemy.setActive(true)
+	GlobalNodes.getGUIMap().playerEnteredRoom(gridPosition)
 
 func deactivate() -> void:
 	for enemy in _enemies:

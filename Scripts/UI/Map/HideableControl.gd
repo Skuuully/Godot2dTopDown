@@ -11,6 +11,7 @@ func show():
 		tween.start()
 		
 		showing = true
+		enableInput(true)
 
 func hide():
 	if showing:
@@ -19,3 +20,11 @@ func hide():
 		tween.start()
 		
 		showing = false
+		enableInput(false)
+
+func enableInput(enable:bool)-> void:
+	set_process_input(enable)
+	set_process_unhandled_input(enable)
+	for child in Utils.getAllChildren(self):
+		child.set_process_input(enable)
+		child.set_process_unhandled_input(enable)

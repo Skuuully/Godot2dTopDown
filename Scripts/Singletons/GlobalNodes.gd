@@ -28,3 +28,6 @@ func getPlayer() -> Player:
 
 func getGUI() -> Node:
 	return getNode("GUI")
+
+func getGUIMap() -> Node:
+	return getNode("MapContainer")

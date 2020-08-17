@@ -27,13 +27,13 @@ func open() -> void:
 	if !isOpen && pairedDoor != null:
 		sprite.texture = textureOpen
 		isOpen = true
-		collisionShape.disabled = true
+		set_deferred("collisionShape", true)
 
 func close() -> void:
 	if isOpen:
 		sprite.texture = textureClosed
 		isOpen = false
-		collisionShape.disabled = false
+		set_deferred("collisionShape", false)
 
 func _onBodyEnter(body) -> void:
 	if isOpen && (body is Player):
@@ -86,6 +86,8 @@ func setupExitLocation(adjacentRoom:Node) -> void:
 		open()
 
 func teleportPlayer() -> void:
+	GlobalNodes.getPlayer().global_position = Vector2(-100, -100)
+	yield(get_tree().create_timer(0.01), "timeout")
 	GlobalNodes.getPlayer().global_position = pairedDoor.entryPosition.global_position
 	pairedDoor.get_parent().get_parent().activate()
 

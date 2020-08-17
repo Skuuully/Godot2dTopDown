@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/UI/Map/HideableControl.gd" type="Script" id=1]
 
-
 [node name="HideableControl" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0

@@ -11,8 +11,6 @@ var _velocity = Vector2(0,0)
 export var MAX_LIFE:int = 6;
 
 # Bullet based stuff
-export var BULLETSPEED:float = 120;
-export var TIMEBETWEENSHOTS:float = 0.2
 export var BULLETDAMAGE:float = 1;
 var projectile:PackedScene = preload("res://Prefabs/Combat/Bullet.tscn")
 
@@ -59,15 +57,15 @@ func shoot() -> void:
 		createProj()
 
 func createProj() -> void:
-	gunTimer.start(TIMEBETWEENSHOTS)
+	gunTimer.start(PlayerStats.fireRate)
 	var projInstance:Bullet = projectile.instance()
 	get_tree().get_root().add_child(projInstance)
 	emit_signal("_bulletCreated", projInstance)
-	projInstance.setDamage(BULLETDAMAGE)
+	projInstance.setDamage(PlayerStats.damage())
 
 	var mousePos:Vector2 = get_global_mouse_position()
 	var bulletDirection:Vector2 = (mousePos - position).normalized()
-	projInstance.linear_velocity = bulletDirection * BULLETSPEED
+	projInstance.linear_velocity = bulletDirection * PlayerStats.bulletSpeed
 	projInstance.set_position(position + (bulletDirection * 25))
 
 func checkCollisions() -> void:

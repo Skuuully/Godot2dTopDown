@@ -16,7 +16,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 128.0
+margin_bottom = 112.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapDrawTo" type="ColorRect" parent="."]
 margin_left = -16.0
 margin_top = -8.0
 margin_right = 120.0
@@ -29,7 +39,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapContainer" type="GridContainer" parent="Background"]
+[node name="MapContainer" type="GridContainer" parent="MapDrawTo"]
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 352.0
@@ -42,43 +52,43 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MapElement" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 
-[node name="MapElement2" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement2" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 68.0
 margin_right = 132.0
 
-[node name="MapElement3" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement3" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 136.0
 margin_right = 200.0
 
-[node name="MapElement4" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement4" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_top = 68.0
 margin_bottom = 132.0
 
-[node name="MapElement5" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement5" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 68.0
 margin_top = 68.0
 margin_right = 132.0
 margin_bottom = 132.0
 
-[node name="MapElement6" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement6" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 136.0
 margin_top = 68.0
 margin_right = 200.0
 margin_bottom = 132.0
 
-[node name="MapElement7" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement7" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_top = 136.0
 margin_bottom = 200.0
 
-[node name="MapElement8" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement8" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 68.0
 margin_top = 136.0
 margin_right = 132.0
 margin_bottom = 200.0
 
-[node name="MapElement9" parent="Background/MapContainer" instance=ExtResource( 4 )]
+[node name="MapElement9" parent="MapDrawTo/MapContainer" instance=ExtResource( 4 )]
 margin_left = 136.0
 margin_top = 136.0
 margin_right = 200.0

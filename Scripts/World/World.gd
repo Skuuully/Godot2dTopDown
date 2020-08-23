@@ -12,7 +12,7 @@ onready var _playerCamera = $PlayerCamera
 onready var _bulletManager = $BulletManager
 
 # The currently active room
-onready var _activeRoom = $StartRoom
+onready var _activeRoom = null
 
 onready var _gui = $GUI
 onready var worldMap = $WorldMap
@@ -29,13 +29,12 @@ func _ready():
 		if (child != null) && child.has_method("isRoom"):
 			Utils.checkError(child.connect("playerExited", self, "_playerExited"))
 			Utils.checkError(child.connect("playerEntered", self, "_playerEntered"))
-	
-	_activeRoom.activateCamera()
 
 # Handler for when the player moves
 func _onPlayerMove(playerPosition):
 	# Inform the active room of the player position
-	_activeRoom.playerMoved(playerPosition)
+	if _activeRoom != null:
+		_activeRoom.playerMoved(playerPosition)
 	_playerCamera.playerMoved(playerPosition)
 
 func getAllBullets():

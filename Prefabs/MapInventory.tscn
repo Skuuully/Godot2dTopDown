@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/Map/MapInventory/MapInventory.gd" type="Script" id=1]
+
+[node name="RoomBar" type="Control"]
+margin_left = 136.0
+margin_top = 296.0
+margin_right = 720.0
+margin_bottom = 360.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 584.0
+margin_bottom = 64.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="MapInventory" type="GridContainer" parent="."]
+margin_right = 584.0
+margin_bottom = 64.0
+columns = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}

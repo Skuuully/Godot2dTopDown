@@ -12,11 +12,14 @@ func getNode(nodeName:String) -> Node:
 	
 	if node == null:
 		var world:Node = nodeCache["World"]
-		node = world.find_node(nodeName, true, false)
-		if node == null:
-			printerr("Attempting to find node: " + nodeName + " but failed")
+		if world != null:
+			node = world.find_node(nodeName, true, false)
+			if node == null:
+				printerr("Attempting to find node: " + nodeName + " but failed")
+			else:
+				nodeCache[nodeName] = node
 		else:
-			nodeCache[nodeName] = node
+			printerr("Attempting to find node: " + nodeName + " but failed")
 	
 	return node
 

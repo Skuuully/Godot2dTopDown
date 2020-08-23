@@ -79,6 +79,21 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://git_api.gdns"
 }, {
+"base": "TextureRect",
+"class": "InventoryRoom",
+"language": "GDScript",
+"path": "res://Scripts/UI/Map/MapInventory/InventoryRoom.gd"
+}, {
+"base": "Node",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Scripts/Items/Item.gd"
+}, {
+"base": "Item",
+"class": "ItemReinforcedChamber",
+"language": "GDScript",
+"path": "res://Scripts/Items/ItemReinforcedChamber.gd"
+}, {
 "base": "GridContainer",
 "class": "MapContainer",
 "language": "GDScript",
@@ -119,6 +134,9 @@ _global_script_class_icons={
 "FollowPlayerEnemyFollowState": "",
 "FollowPlayerEnemyStateMachine": "",
 "GitAPI": "",
+"InventoryRoom": "",
+"Item": "",
+"ItemReinforcedChamber": "",
 "MapContainer": "",
 "MapElement": "",
 "Player": "",
@@ -137,6 +155,9 @@ config/icon="res://Sprites/icon.png"
 Utils="*res://Scripts/Singletons/Utils.gd"
 BulletManager="*res://Scripts/Singletons/BulletManager.gd"
 GlobalNodes="*res://Scripts/Singletons/GlobalNodes.gd"
+PlayerStats="*res://Scripts/Player/PlayerStats.gd"
+PlayerInventory="*res://Scripts/Player/PlayerInventory.gd"
+MouseData="*res://Scripts/UI/Map/MapInventory/MouseData.gd"
 
 [display]
 

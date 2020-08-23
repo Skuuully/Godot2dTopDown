@@ -21,7 +21,7 @@ onready var doors = $Doors
 # The enemies in the room
 var _enemies = Array()
 
-var gridPosition:Vector2 = Vector2(0, 0)
+var gridPosition:Vector2 = Vector2(-1, -1)
 
 signal playerExited()
 signal playerEntered()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/UI/LifeBar/Over.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/LifeBar/Under.png" type="Texture" id=2]
 [ext_resource path="res://Prefabs/Map.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/UI/UI.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/UI/LifeBar/Progress.png" type="Texture" id=5]
+[ext_resource path="res://Prefabs/MapInventory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/HideableControl.tscn" type="PackedScene" id=7]
 
 [node name="Control" type="Control"]
@@ -25,27 +26,7 @@ __meta__ = {
 margin_top = 208.0
 margin_bottom = 336.0
 
-[node name="RoomBar" type="Control" parent="CanvasLayer/NonCombat"]
-margin_left = 136.0
-margin_top = 296.0
-margin_right = 720.0
-margin_bottom = 360.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/NonCombat/RoomBar"]
-margin_right = 584.0
-margin_bottom = 64.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="MapInventory" type="GridContainer" parent="CanvasLayer/NonCombat/RoomBar"]
-margin_right = 584.0
-margin_bottom = 64.0
-columns = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MapInventory" parent="CanvasLayer/NonCombat" instance=ExtResource( 6 )]
 
 [node name="Combat" parent="CanvasLayer" instance=ExtResource( 7 )]
 

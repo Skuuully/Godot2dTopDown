@@ -16,9 +16,9 @@ func _removeBullet(bullet):
 
 func _onCollision(bullet:Bullet, collisionPosition:Vector2, other:Node) -> void:
 	var damageText = dmgText.instance()
-	get_tree().get_root().add_child(damageText)
 	damageText.rect_position = collisionPosition
 	damageText.text = str(bullet.getDamage())
 	for node in other.get_children():
 		if other.has_node("Damageable"):
 			other.get_node("Damageable").takeDamage(bullet)
+	get_tree().get_root().add_child(damageText)

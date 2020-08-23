@@ -1,14 +1,16 @@
+# Responsible for generating the grid of nodes that rooms may be placed at
 extends Node2D
 class_name WorldMap
 
 signal roomAdded(room)
 
-export var rows:int
-export var cols:int
-export var xSpace:int
-export var ySpace:int
+export(int) var rows:int
+export(int) var cols:int
+export(int) var xSpace:int
+export(int) var ySpace:int
 
-var basicRoom = preload("res://Prefabs/Rooms/BasicRoom.tscn")
+var basicRoom:PackedScene = preload("res://Prefabs/Rooms/BasicRoom.tscn")
+var startRoom:PackedScene = preload("res://Prefabs/Rooms/StartRoom.tscn")
 
 # Map of vector2(row,col) to Position2D(World space for rooms)
 var positionMap = {}
@@ -29,6 +31,26 @@ func createGrid() -> void:
 			self.add_child(pos)
 			positionMap[Vector2(row, col)] = pos
 			placedMap[Vector2(row, col)] = null
+	
+	createGUIGrid()
+	placeStartRoomAtCenter()
+
+func createGUIGrid() -> void:
+	GlobalNodes.getGUIMap().initialiseGrid(rows, cols)
+
+func placeStartRoomAtCenter() -> void:
+	var startRoomInstance = startRoom.instance()
+	var rowPos = floor(rows as float / 2.0)
+	var colPos = floor(cols as float / 2.0)
+	var gridPosition = Vector2(rowPos, colPos)
+	startRoomInstance.global_position = positionMap.get(gridPosition).position
+	get_parent().call_deferred("add_child", startRoomInstance)
+	placedMap[gridPosition] = startRoomInstance
+	emit_signal("roomAdded", startRoomInstance)
+	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.ENEMY_ROOM)
+	GlobalNodes.getPlayer().global_position = positionMap[gridPosition].position 
+	GlobalNodes.getPlayer().global_position.x += 100
+	GlobalNodes.getPlayer().global_position.y += 100
 
 func connectToGUI() -> void:
 	var guiMap = get_parent().find_node("MapContainer", true, false)
@@ -41,10 +63,13 @@ func connectToGUI() -> void:
 # @param state The state of the MapElement
 func onGUIStatusChange(pos:Vector2, state) -> void:
 	if state != MapElement.State.HOVER && state != MapElement.State.EMPTY:
-		var position:Position2D = positionMap.get(pos)
-		var instance = basicRoom.instance()
-		instance.global_position = position.position
-		instance.gridPosition = pos
-		get_parent().add_child(instance)
-		placedMap[pos] = instance
-		emit_signal("roomAdded", instance)
+		placeRoom(basicRoom, pos)
+
+func placeRoom(room:PackedScene, pos:Vector2) -> void:
+	var position:Position2D = positionMap.get(pos)
+	var instance = room.instance()
+	instance.global_position = position.position
+	instance.gridPosition = pos
+	get_parent().add_child(instance)
+	placedMap[pos] = instance
+	emit_signal("roomAdded", instance)

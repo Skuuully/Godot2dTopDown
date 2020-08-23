@@ -11,7 +11,8 @@ var pairedDoor = null
 
 onready var sprite = $Sprite
 onready var exitArea = $ExitArea
-onready var collisionShape = $CollisionArea/CollisionShape2D
+onready var collisionShape:CollisionShape2D = $CollisionArea/CollisionShape2D
+onready var exitShape:CollisionShape2D = $CollisionArea/CollisionShape2D
 onready var entryPosition:Position2D = $EntryPosition
 
 enum doorFacing {UP, DOWN, LEFT, RIGHT}
@@ -27,13 +28,13 @@ func open() -> void:
 	if !isOpen && pairedDoor != null:
 		sprite.texture = textureOpen
 		isOpen = true
-		set_deferred("collisionShape", true)
+		collisionShape.set_deferred("disabled", true)
 
 func close() -> void:
 	if isOpen:
 		sprite.texture = textureClosed
 		isOpen = false
-		set_deferred("collisionShape", false)
+		collisionShape.set_deferred("disabled", false)
 
 func _onBodyEnter(body) -> void:
 	if isOpen && (body is Player):
@@ -44,7 +45,7 @@ func _onRoomAdded(_instance) -> void:
 	if pairedDoor == null:
 		var adjacentRoom = getAdjacentRoom()
 		if adjacentRoom != null:
-			setupExitLocation(adjacentRoom)
+			setupPairedDoor(adjacentRoom)
 
 func getAdjacentRoom() -> Node:
 	var room = get_parent().get_parent()
@@ -61,7 +62,7 @@ func getAdjacentRoom() -> Node:
 	var worldMap = GlobalNodes.getWorldMap()
 	return worldMap.placedMap.get(adjacentPosition)
 	
-func setupExitLocation(adjacentRoom:Node) -> void:
+func setupPairedDoor(adjacentRoom:Node) -> void:
 	for door in adjacentRoom.doors.get_children():
 		var oppositeDir = door.doorDirection
 		match doorDirection:
@@ -84,12 +85,19 @@ func setupExitLocation(adjacentRoom:Node) -> void:
 	
 	if pairedDoor != null:
 		open()
+		if pairedDoor.pairedDoor == null:
+			pairedDoor.pairedDoor = self
+			pairedDoor.open()
 
+# SFI: Would be nice to play some screen wide animation that hides the screen 
+# then redisplays once the player is in the room
 func teleportPlayer() -> void:
-	GlobalNodes.getPlayer().global_position = Vector2(-100, -100)
-	yield(get_tree().create_timer(0.01), "timeout")
-	GlobalNodes.getPlayer().global_position = pairedDoor.entryPosition.global_position
-	pairedDoor.get_parent().get_parent().activate()
+	var player = GlobalNodes.getPlayer()
+	var entryPos = pairedDoor.entryPosition.global_position
+	var vec = player.global_position - entryPos
+	player.global_position = entryPos + vec/2
+	yield(get_tree().create_timer(0.1), "timeout")
+	player.global_position = entryPos
 
 # setter for doorFacing, allows changing value in editor to reflect in the room
 # instantly

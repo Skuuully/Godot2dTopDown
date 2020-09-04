@@ -3,8 +3,9 @@ extends TextureRect
 class_name MapElement
 
 signal stateChanged(pos, state)
+signal roomPlaced(room)
 
-enum State {EMPTY, HOVER, EMPTY_ROOM, ENEMY_ROOM}
+enum State {EMPTY, HOVER, EMPTY_ROOM, ENEMY_ROOM, LOOT}
 var currState = State.EMPTY
 
 export(bool) var containsPlayer:bool setget setContainsPlayer
@@ -29,6 +30,8 @@ func changeState(newState) -> void:
 			texture = emptyRoomTexture
 		State.ENEMY_ROOM:
 			texture = enemyRoomTexture
+		State.LOOT:
+			texture = enemyRoomTexture
 	
 	emit_signal("stateChanged", get_parent().getPosition(self), currState)
 
@@ -40,10 +43,20 @@ func mouse_exited() -> void:
 	if (currState == State.HOVER):
 		changeState(State.EMPTY)
 
-func _input(event) -> void:
-	if (event.get_action_strength("lmb") && currState == State.HOVER):
-		changeState(State.ENEMY_ROOM)
-
 func setContainsPlayer(contains:bool) -> void:
 	containsPlayer = contains
 	$PlayerBorder.visible = contains
+
+func can_drop_data(position, data):
+	return currState == State.HOVER && data is InventoryRoom
+
+func drop_data(position, data):
+	var room:InventoryRoom = data as InventoryRoom
+	match (room.thisType):
+		room.type.EMPTY:
+			changeState(State.EMPTY)
+		room.type.ENEMY:
+			changeState(State.ENEMY_ROOM)
+		room.type.LOOT:
+			changeState(State.LOOT)
+	emit_signal("roomPlaced", room)

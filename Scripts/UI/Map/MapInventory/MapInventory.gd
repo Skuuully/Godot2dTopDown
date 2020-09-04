@@ -12,9 +12,19 @@ func _ready() -> void:
 			preload("res://Prefabs/Rooms/BasicRoom.tscn"),
 			preload("res://Sprites/icon.png"))
 		addRoom(room)
+	get_parent().get_child(1).connectToMapElements(self)
 
 func addRoom(room:InventoryRoom) -> void:
 	if rooms.size() < inventorySize:
 		rooms.append(room)
 		inventoryGrid.add_child(room)
+
+func removeRoom(room:InventoryRoom) -> void:
+	var index:int = rooms.find(room)
+	if index != -1:
+		rooms.remove(index)
+
+func onRoomPlaced(room) -> void:
+	removeRoom(room)
+	room.queue_free()
 

@@ -35,18 +35,12 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	move()
 	checkCollisions()
-
-func _unhandled_input(event):
-	if (Input.get_action_strength("lmb") > 0):
-		shoot()
+	shoot()
 
 # Moves the player
 func move() -> void:
-	var xInput:float = Input.get_action_strength("right") - Input.get_action_strength("left")
-	var yInput:float = Input.get_action_strength("down") - Input.get_action_strength("up")
-
-	if xInput != 0 || yInput != 0:
-		var movement:Vector2 = Vector2(xInput, yInput)
+	if $PlayerInput.x != 0 || $PlayerInput.y != 0:
+		var movement:Vector2 = Vector2($PlayerInput.x, $PlayerInput.y)
 		movement = movement.normalized()
 		movement *= ACCELERATION
 		movement.x = clamp(movement.x, -MAX_SPEED, MAX_SPEED)
@@ -55,7 +49,7 @@ func move() -> void:
 		emit_signal("moved", global_position)
 
 func shoot() -> void:
-	if gunTimer.is_stopped():
+	if $PlayerInput.shooting && gunTimer.is_stopped():
 		createProj()
 
 func createProj() -> void:

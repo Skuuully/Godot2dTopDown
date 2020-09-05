@@ -8,7 +8,6 @@
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/Combat/Damageable.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
@@ -39,6 +38,7 @@ margin_left = -48.0
 margin_top = 40.0
 margin_right = 56.0
 margin_bottom = 72.0
+mouse_filter = 2
 text = "Not entered"
 __meta__ = {
 "_edit_use_anchors_": false

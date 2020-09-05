@@ -57,13 +57,12 @@ func connectToGUI() -> void:
 	if guiMap != null:
 		for child in guiMap.get_children():
 			if child is MapElement:
-				Utils.checkError(child.connect("stateChanged", self, "onGUIStatusChange"))
+				Utils.checkError(child.connect("roomPlaced", self, "onRoomPlaced"))
 
 # @param pos The position of the room in (row,col)
-# @param state The state of the MapElement
-func onGUIStatusChange(pos:Vector2, state) -> void:
-	if state != MapElement.State.HOVER && state != MapElement.State.EMPTY:
-		placeRoom(basicRoom, pos)
+# @param room The rooms scene to place
+func onRoomPlaced(room, pos:Vector2) -> void:
+	placeRoom(room.scene, pos)
 
 func placeRoom(room:PackedScene, pos:Vector2) -> void:
 	var position:Position2D = positionMap.get(pos)

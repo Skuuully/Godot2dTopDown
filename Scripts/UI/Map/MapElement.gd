@@ -2,8 +2,7 @@
 extends TextureRect
 class_name MapElement
 
-signal stateChanged(pos, state)
-signal roomPlaced(room)
+signal roomPlaced(room, pos)
 
 enum State {EMPTY, HOVER, EMPTY_ROOM, ENEMY_ROOM, LOOT}
 var currState = State.EMPTY
@@ -32,8 +31,6 @@ func changeState(newState) -> void:
 			texture = enemyRoomTexture
 		State.LOOT:
 			texture = enemyRoomTexture
-	
-	emit_signal("stateChanged", get_parent().getPosition(self), currState)
 
 func mouse_entered():
 	if (currState == State.EMPTY):
@@ -59,4 +56,4 @@ func drop_data(position, data):
 			changeState(State.ENEMY_ROOM)
 		room.type.LOOT:
 			changeState(State.LOOT)
-	emit_signal("roomPlaced", room)
+	emit_signal("roomPlaced", room, get_parent().getPosition(self))

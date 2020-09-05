@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://git_api.gdns"
 }, {
+"base": "Control",
+"class": "HideableControl",
+"language": "GDScript",
+"path": "res://Scripts/UI/Map/HideableControl.gd"
+}, {
 "base": "TextureRect",
 "class": "InventoryRoom",
 "language": "GDScript",
@@ -134,6 +139,7 @@ _global_script_class_icons={
 "FollowPlayerEnemyFollowState": "",
 "FollowPlayerEnemyStateMachine": "",
 "GitAPI": "",
+"HideableControl": "",
 "InventoryRoom": "",
 "Item": "",
 "ItemReinforcedChamber": "",

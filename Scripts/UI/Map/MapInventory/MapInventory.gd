@@ -7,10 +7,14 @@ onready var inventoryGrid = $MapInventory
 
 func _ready() -> void:
 	inventoryGrid.columns = inventorySize
-	for i in 10:
+	for i in 5:
 		var room = InventoryRoom.new(
-			preload("res://Prefabs/Rooms/BasicRoom.tscn"),
+			preload("res://Prefabs/Rooms/LootRoom.tscn"),
 			preload("res://Sprites/icon.png"))
+		addRoom(room)
+		room = InventoryRoom.new(
+			preload("res://Prefabs/Rooms/BasicRoom.tscn"),
+			preload("res://Sprites/ball.png"))
 		addRoom(room)
 	get_parent().get_child(1).connectToMapElements(self)
 
@@ -24,7 +28,7 @@ func removeRoom(room:InventoryRoom) -> void:
 	if index != -1:
 		rooms.remove(index)
 
-func onRoomPlaced(room) -> void:
+func onRoomPlaced(room, _pos) -> void:
 	removeRoom(room)
 	room.queue_free()
 

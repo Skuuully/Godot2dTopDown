@@ -4,7 +4,7 @@ class_name InventoryRoom
 var scene:PackedScene = null
 var mouseOver:bool = false
 enum type {EMPTY, ENEMY, LOOT}
-var thisType = type.ENEMY
+var thisType = type.LOOT
 
 func _init(inScene:PackedScene, inTexture:Texture) -> void:
 	self.scene = inScene

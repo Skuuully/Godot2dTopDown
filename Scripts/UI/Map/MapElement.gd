@@ -44,10 +44,10 @@ func setContainsPlayer(contains:bool) -> void:
 	containsPlayer = contains
 	$PlayerBorder.visible = contains
 
-func can_drop_data(position, data):
+func can_drop_data(_position, data):
 	return currState == State.HOVER && data is InventoryRoom
 
-func drop_data(position, data):
+func drop_data(_position, data):
 	var room:InventoryRoom = data as InventoryRoom
 	match (room.thisType):
 		room.type.EMPTY:

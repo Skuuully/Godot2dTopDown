@@ -29,7 +29,7 @@ func mouseExited() -> void:
 	mouseOver = false
 	modulate.a = 1
 
-func get_drag_data(position):
+func get_drag_data(_position):
 	var rect:ColorRect = ColorRect.new()
 	rect.rect_size = Vector2(30, 30)
 	set_drag_preview(rect)

@@ -18,5 +18,3 @@ func getAllChildren(node:Node) -> Array:
 	
 	return children
 
-func addToTreeRoot(node:Node):
-	get_tree().get_root().add_child(node)

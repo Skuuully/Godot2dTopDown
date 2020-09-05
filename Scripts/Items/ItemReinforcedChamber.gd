@@ -1,6 +1,9 @@
 extends Item
 class_name ItemReinforcedChamber
 
+func _init() -> void:
+	texture = preload("res://Sprites/Environment/CardBorder.png")
+
 func flavourText() -> String:
 	return "Reinforces the chamber"
 

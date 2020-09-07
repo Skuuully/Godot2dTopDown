@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Combat/Enemies/EnemyNavigation2D.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/LootSpawn.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/World/Room/Room.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/World/Room/Doors.gd" type="Script" id=5]
 [ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=6]
@@ -75,7 +76,6 @@ script = ExtResource( 5 )
 
 [node name="Door" parent="Doors" instance=ExtResource( 2 )]
 position = Vector2( 176, 0 )
-rotation = 0.0
 
 [node name="Door2" parent="Doors" instance=ExtResource( 2 )]
 position = Vector2( 16, 88 )
@@ -89,4 +89,7 @@ doorDirection = 3
 
 [node name="Door4" parent="Doors" instance=ExtResource( 2 )]
 position = Vector2( 176, 160 )
+rotation = 3.14159
 doorDirection = 1
+
+[node name="LootSpawn" parent="." instance=ExtResource( 3 )]

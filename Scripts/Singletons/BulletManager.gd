@@ -17,7 +17,8 @@ func _removeBullet(bullet):
 func _onCollision(bullet:Bullet, collisionPosition:Vector2, other:Node) -> void:
 	var damageText = dmgText.instance()
 	damageText.rect_position = collisionPosition
-	damageText.text = str(bullet.getDamage())
+	var displayDamage = (floor(bullet.getDamage() * 10) / 10)
+	damageText.text = str(displayDamage)
 	for node in other.get_children():
 		if other.has_node("Damageable"):
 			other.get_node("Damageable").takeDamage(bullet)

@@ -62,7 +62,7 @@ func connectToGUI() -> void:
 # @param pos The position of the room in (row,col)
 # @param room The rooms scene to place
 func onRoomPlaced(room, pos:Vector2) -> void:
-	placeRoom(room.scene, pos)
+	placeRoom(room.mapData.scene, pos)
 
 func placeRoom(room:PackedScene, pos:Vector2) -> void:
 	var position:Position2D = positionMap.get(pos)

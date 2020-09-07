@@ -49,11 +49,12 @@ func can_drop_data(_position, data):
 
 func drop_data(_position, data):
 	var room:InventoryRoom = data as InventoryRoom
-	match (room.thisType):
-		room.type.EMPTY:
+	var mapData = room.mapData
+	match (mapData.type):
+		mapData.mapType.EMPTY:
 			changeState(State.EMPTY)
-		room.type.ENEMY:
+		mapData.mapType.ENEMY:
 			changeState(State.ENEMY_ROOM)
-		room.type.LOOT:
+		mapData.mapType.LOOT:
 			changeState(State.LOOT)
 	emit_signal("roomPlaced", room, get_parent().getPosition(self))

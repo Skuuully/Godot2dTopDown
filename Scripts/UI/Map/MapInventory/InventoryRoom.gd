@@ -1,14 +1,12 @@
 extends TextureRect
 class_name InventoryRoom
 
-var scene:PackedScene = null
+var mapData:MapData
 var mouseOver:bool = false
-enum type {EMPTY, ENEMY, LOOT}
-var thisType = type.LOOT
 
-func _init(inScene:PackedScene, inTexture:Texture) -> void:
-	self.scene = inScene
-	self.texture = inTexture
+func _init(inMapData:MapData) -> void:
+	mapData = inMapData
+	texture = mapData.texture
 	
 	# Temp, allows icons to look different to test correct one being removed on place
 	var rng = RandomNumberGenerator.new()

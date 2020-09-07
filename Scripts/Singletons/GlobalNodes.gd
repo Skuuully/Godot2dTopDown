@@ -34,3 +34,6 @@ func getGUI() -> Node:
 
 func getGUIMap() -> Node:
 	return getNode("MapContainer")
+
+func getGUIMapInventory() -> Node:
+	return getNode("MapInventory")

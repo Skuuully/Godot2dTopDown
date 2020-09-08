@@ -24,7 +24,6 @@ onready var damageable:Damageable = $Damageable
 
 # fired when player positions changes, additionally sends out new position
 signal moved()
-signal _bulletCreated(newBullet)
 
 func _ready() -> void:
 	damageable.setHealth(MAX_LIFE)
@@ -54,10 +53,9 @@ func shoot() -> void:
 
 func createProj() -> void:
 	gunTimer.start(PlayerStats.fireRate)
-	var projInstance:Bullet = BulletManager.getBullet()
-	emit_signal("_bulletCreated", projInstance)
+	var projInstance:Bullet = Utils.bulletScene.instance()
+	get_tree().get_root().add_child(projInstance)
 	projInstance.setDamage(PlayerStats.damage())
-
 	var mousePos:Vector2 = get_global_mouse_position()
 	var bulletDirection:Vector2 = (mousePos - position).normalized()
 	projInstance.linear_velocity = bulletDirection * PlayerStats.bulletSpeed

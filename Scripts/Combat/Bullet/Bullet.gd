@@ -3,27 +3,22 @@
 extends RigidBody2D
 class_name Bullet
 
-signal collision()
-
 var _lastFrameLinearVelocity = Vector2(0, 0) setget , getLastFrameLinearVelocity
 
 # The damage value that the bullet will hold 
 var _damage setget setDamage, getDamage
 
 var _collisionParticles = preload("res://Prefabs/Combat/BulletCollisionParticles.tscn")
+var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
 
 var _creator:Node2D setget setCreator, getCreator
-
-func _ready():
-	var lifetime:float = 5.0
-	Utils.checkError(get_tree().create_timer(lifetime).connect("timeout", self, "onTimeout"))
 
 func _physics_process(_delta):
 	var newBodies:Array = get_colliding_bodies()
 	for body in newBodies:
 		createParticles()
 		if body.has_node("Damageable") && (body != _creator):
-			emit_signal("collision", self, position, body)
+			onCollision(body)
 			queue_free()
 		else:
 			queue_free()
@@ -53,5 +48,12 @@ func setCreator(creator:Node2D) -> void:
 func getCreator() -> Node2D:
 	return _creator
 
-func onTimeout() -> void:
-	BulletManager.removeBullet(self)
+func onCollision(other:Node) -> void:
+	var damageText = dmgText.instance()
+	damageText.rect_position = position
+	var displayDamage = (floor(_damage * 10) / 10)
+	damageText.text = str(displayDamage)
+	for node in other.get_children():
+		if other.has_node("Damageable"):
+			other.get_node("Damageable").takeDamage(self)
+	get_tree().get_root().add_child(damageText)

@@ -30,7 +30,7 @@ BULLET_COUNT = 8
 [node name="CenterPoint" type="Position2D" parent="StateMachine/Shooting"]
 
 [node name="ProjSpawn" type="Position2D" parent="StateMachine/Shooting"]
-position = Vector2( 40, -40 )
+position = Vector2( 48, -48 )
 
 [node name="StateDisplay" type="RichTextLabel" parent="StateMachine"]
 visible = false

@@ -1,6 +1,8 @@
 extends Node
 
 
+var bulletScene = preload("res://Prefabs/Combat/Bullet.tscn")
+
 var CONNECT_ERROR:String = "Connection failed to connect"
 
 func checkError(error:int) -> void:

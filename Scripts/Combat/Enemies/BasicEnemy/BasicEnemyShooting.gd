@@ -37,9 +37,9 @@ func _createProjectiles() -> void:
 		_createProj(vel, pos)
 
 func _createProj(velocity:Vector2, position:Vector2) -> void:
-	var bulletInstance:Bullet = BulletManager.getBullet()
+	var bulletInstance:Bullet = Utils.bulletScene.instance()
 	bulletInstance.setCreator(_stateMachine.get_parent())
 	bulletInstance.setDamage(BULLET_DMG)
 	bulletInstance.linear_velocity = velocity.normalized() * BULLET_SPEED
 	bulletInstance.position = position
-	pass
+	get_tree().get_root().add_child(bulletInstance)

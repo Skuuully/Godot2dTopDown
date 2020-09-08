@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_exp_long5.wav-bc0550af9869cf176f4886fc0417e034.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Explosions/Long/sfx_exp_long5.wav"
+dest_files=[ "res://.import/sfx_exp_long5.wav-bc0550af9869cf176f4886fc0417e034.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

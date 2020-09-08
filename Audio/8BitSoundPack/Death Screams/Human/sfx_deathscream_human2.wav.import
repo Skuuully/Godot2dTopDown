@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_deathscream_human2.wav-3d6f7b3965205e0d1395939177fb8113.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Death Screams/Human/sfx_deathscream_human2.wav"
+dest_files=[ "res://.import/sfx_deathscream_human2.wav-3d6f7b3965205e0d1395939177fb8113.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

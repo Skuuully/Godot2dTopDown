@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_sound_neutral8.wav-49128abdf1b279ad06f298fbdca7ef8d.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/General Sounds/Neutral Sounds/sfx_sound_neutral8.wav"
+dest_files=[ "res://.import/sfx_sound_neutral8.wav-49128abdf1b279ad06f298fbdca7ef8d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

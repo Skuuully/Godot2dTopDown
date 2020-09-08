@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Player/PlayerCamera.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Singletons/BulletManager.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/UI/Map/WorldMap.gd" type="Script" id=11]
 
@@ -20,7 +19,6 @@ margin_bottom = -32.0
 position = Vector2( 280, -72 )
 
 [node name="BulletManager" type="Node2D" parent="."]
-script = ExtResource( 7 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource( 5 )

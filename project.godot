@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/UI/Map/MapInventory/MapInventory.gd"
 }, {
+"base": "Node2D",
+"class": "MultipleAudioPlayer",
+"language": "GDScript",
+"path": "res://Scripts/MultipleAudioPlayer.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -157,6 +162,7 @@ _global_script_class_icons={
 "MapData": "",
 "MapElement": "",
 "MapInventory": "",
+"MultipleAudioPlayer": "",
 "Player": "",
 "Room": "",
 "WorldMap": ""
@@ -171,7 +177,6 @@ config/icon="res://Sprites/icon.png"
 [autoload]
 
 Utils="*res://Scripts/Singletons/Utils.gd"
-BulletManager="*res://Scripts/Singletons/BulletManager.gd"
 GlobalNodes="*res://Scripts/Singletons/GlobalNodes.gd"
 PlayerStats="*res://Scripts/Player/PlayerStats.gd"
 PlayerInventory="*res://Scripts/Player/PlayerInventory.gd"

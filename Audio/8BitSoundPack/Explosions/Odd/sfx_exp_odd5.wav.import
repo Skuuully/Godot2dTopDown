@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_exp_odd5.wav-12b21dbf6d2ae822dab629d5e9b1334a.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Explosions/Odd/sfx_exp_odd5.wav"
+dest_files=[ "res://.import/sfx_exp_odd5.wav-12b21dbf6d2ae822dab629d5e9b1334a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

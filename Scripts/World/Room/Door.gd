@@ -14,6 +14,7 @@ onready var exitArea = $ExitArea
 onready var collisionShape:CollisionShape2D = $CollisionArea/CollisionShape2D
 onready var exitShape:CollisionShape2D = $CollisionArea/CollisionShape2D
 onready var entryPosition:Position2D = $EntryPosition
+onready var audioPlayer:MultipleAudioPlayer = $MultipleAudioPlayer
 
 enum doorFacing {UP, DOWN, LEFT, RIGHT}
 export(doorFacing) var doorDirection = doorFacing.UP setget setDoorFacing
@@ -26,12 +27,14 @@ func _ready():
 
 func open() -> void:
 	if !isOpen && pairedDoor != null:
+		audioPlayer.play(preload("res://Audio/Door/qubodup-DoorOpen01.ogg"))
 		sprite.texture = textureOpen
 		isOpen = true
 		collisionShape.set_deferred("disabled", true)
 
 func close() -> void:
 	if isOpen:
+		audioPlayer.play(preload("res://Audio/Door/qubodup-DoorClose01.ogg"))
 		sprite.texture = textureClosed
 		isOpen = false
 		collisionShape.set_deferred("disabled", false)

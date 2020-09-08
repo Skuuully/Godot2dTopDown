@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_exp_short_hard1.wav-ca9b628b5b770cfe8ed1d1490954f8fc.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Explosions/Short/sfx_exp_short_hard1.wav"
+dest_files=[ "res://.import/sfx_exp_short_hard1.wav-ca9b628b5b770cfe8ed1d1490954f8fc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

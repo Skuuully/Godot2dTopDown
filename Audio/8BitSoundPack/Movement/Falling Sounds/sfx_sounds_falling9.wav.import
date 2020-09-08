@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_sounds_falling9.wav-d7c898ad2d5ab2a9672f2f82b25ffc70.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Movement/Falling Sounds/sfx_sounds_falling9.wav"
+dest_files=[ "res://.import/sfx_sounds_falling9.wav-d7c898ad2d5ab2a9672f2f82b25ffc70.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

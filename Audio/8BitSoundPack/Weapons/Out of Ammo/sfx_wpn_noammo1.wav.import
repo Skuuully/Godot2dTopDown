@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_wpn_noammo1.wav-c19f321455f2a62a89b6a33adb508a68.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Weapons/Out of Ammo/sfx_wpn_noammo1.wav"
+dest_files=[ "res://.import/sfx_wpn_noammo1.wav-c19f321455f2a62a89b6a33adb508a68.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

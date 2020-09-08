@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyIdle.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemy.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/Combat/Damageable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/MultipleAudioPlayer.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -31,6 +32,9 @@ BULLET_COUNT = 8
 
 [node name="ProjSpawn" type="Position2D" parent="StateMachine/Shooting"]
 position = Vector2( 48, -48 )
+
+[node name="MultipleAudioPlayer" type="Node2D" parent="StateMachine/Shooting"]
+script = ExtResource( 8 )
 
 [node name="StateDisplay" type="RichTextLabel" parent="StateMachine"]
 visible = false

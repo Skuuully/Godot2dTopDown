@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slimeball.wav-18c118f6e96632433b6165f3568aa1ae.sample"
+
+[deps]
+
+source_file="res://Audio/Shots/slimeball.wav"
+dest_files=[ "res://.import/slimeball.wav-18c118f6e96632433b6165f3568aa1ae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

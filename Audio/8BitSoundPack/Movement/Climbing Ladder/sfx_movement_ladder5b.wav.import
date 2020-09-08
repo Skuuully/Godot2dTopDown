@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_movement_ladder5b.wav-d930c6bce5258e1d27ff47f8e7ed34c5.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Movement/Climbing Ladder/sfx_movement_ladder5b.wav"
+dest_files=[ "res://.import/sfx_movement_ladder5b.wav-d930c6bce5258e1d27ff47f8e7ed34c5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

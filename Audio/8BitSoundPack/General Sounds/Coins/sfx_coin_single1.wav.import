@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_coin_single1.wav-2e9836861468e812ff4b71a645d0b8ff.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/General Sounds/Coins/sfx_coin_single1.wav"
+dest_files=[ "res://.import/sfx_coin_single1.wav-2e9836861468e812ff4b71a645d0b8ff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

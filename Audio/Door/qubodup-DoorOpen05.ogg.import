@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/qubodup-DoorOpen05.ogg-ed2468250607b4f2c089f0d9b5fbe6dc.oggstr"
+
+[deps]
+
+source_file="res://Audio/Door/qubodup-DoorOpen05.ogg"
+dest_files=[ "res://.import/qubodup-DoorOpen05.ogg-ed2468250607b4f2c089f0d9b5fbe6dc.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

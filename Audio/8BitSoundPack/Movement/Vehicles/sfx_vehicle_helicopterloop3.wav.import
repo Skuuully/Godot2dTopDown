@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_vehicle_helicopterloop3.wav-eb5fea7e36bdb0232f40221ef58e5bd8.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Movement/Vehicles/sfx_vehicle_helicopterloop3.wav"
+dest_files=[ "res://.import/sfx_vehicle_helicopterloop3.wav-eb5fea7e36bdb0232f40221ef58e5bd8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

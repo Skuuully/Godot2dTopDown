@@ -5,6 +5,7 @@ export var BULLET_COUNT:int = 4
 export var BULLET_SPEED:int = 120
 onready var center:Position2D = $CenterPoint
 onready var outer:Position2D = $ProjSpawn 
+onready var audioPlayer = $MultipleAudioPlayer
 
 func enter() -> void:
 	# Change the animation to the shooting animation
@@ -43,3 +44,4 @@ func _createProj(velocity:Vector2, position:Vector2) -> void:
 	bulletInstance.linear_velocity = velocity.normalized() * BULLET_SPEED
 	bulletInstance.position = position
 	get_tree().get_root().add_child(bulletInstance)
+	audioPlayer.play(preload("res://Audio/8BitSoundPack/Weapons/Machinegun/sfx_wpn_machinegun_loop3.wav"))

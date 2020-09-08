@@ -21,6 +21,7 @@ onready var collisionShape:CollisionShape2D = $CollisionShape2D
 onready var screenEffectPlayer:AnimationPlayer = $ScreenEffectPlayer
 onready var shockwave:ColorRect = $ScreenRenderLayer/Shockwave
 onready var damageable:Damageable = $Damageable
+onready var audioPlayer:MultipleAudioPlayer = $MultipleAudioPlayer
 
 # fired when player positions changes, additionally sends out new position
 signal moved()
@@ -52,6 +53,7 @@ func shoot() -> void:
 		createProj()
 
 func createProj() -> void:
+	playShotAudio()
 	gunTimer.start(PlayerStats.fireRate)
 	var projInstance:Bullet = Utils.bulletScene.instance()
 	get_tree().get_root().add_child(projInstance)
@@ -60,6 +62,11 @@ func createProj() -> void:
 	var bulletDirection:Vector2 = (mousePos - position).normalized()
 	projInstance.linear_velocity = bulletDirection * PlayerStats.bulletSpeed
 	projInstance.set_position(position + (bulletDirection * 25))
+
+func playShotAudio() -> void:
+	audioPlayer.play(
+		preload("res://Audio/8BitSoundPack/Weapons/Machinegun/sfx_wpn_machinegun_loop1.wav"),
+		rand_range(0.9, 1.1))
 
 func checkCollisions() -> void:
 	for i in get_slide_count():

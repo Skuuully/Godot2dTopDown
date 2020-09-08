@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_weapon_shotgun3.wav-ac041d09c75f94b64458f96c5eb31e75.sample"
+
+[deps]
+
+source_file="res://Audio/8BitSoundPack/Weapons/Shotgun/sfx_weapon_shotgun3.wav"
+dest_files=[ "res://.import/sfx_weapon_shotgun3.wav-ac041d09c75f94b64458f96c5eb31e75.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

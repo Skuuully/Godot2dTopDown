@@ -54,8 +54,7 @@ func shoot() -> void:
 
 func createProj() -> void:
 	gunTimer.start(PlayerStats.fireRate)
-	var projInstance:Bullet = projectile.instance()
-	get_tree().get_root().add_child(projInstance)
+	var projInstance:Bullet = BulletManager.getBullet()
 	emit_signal("_bulletCreated", projInstance)
 	projInstance.setDamage(PlayerStats.damage())
 

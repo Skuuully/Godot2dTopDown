@@ -8,9 +8,6 @@ onready var player:Player = $Player
 # The player camera, used when no room is currently active
 onready var _playerCamera = $PlayerCamera
 
-# The bullet manager
-onready var _bulletManager = $BulletManager
-
 # The currently active room
 onready var _activeRoom = null
 
@@ -37,22 +34,16 @@ func _onPlayerMove(playerPosition):
 		_activeRoom.playerMoved(playerPosition)
 	_playerCamera.playerMoved(playerPosition)
 
-func getAllBullets():
-	return _bulletManager.getAllBullets()
-
 func _playerExited():
 	_playerCamera.activateCamera(_activeRoom.getCameraPosition())
 	_activeRoom.deactivate()
-	pass
 
 func _playerEntered(newRoom):
 	_activeRoom = newRoom
 	_activeRoom.activate()
-	pass
 
 func _onPlayerDamageTaken() -> void:
 	_gui.updateLife(player.getLife(), player.MAX_LIFE)
-	pass
 
 func _onRoomAdded(room:Room) -> void:
 	Utils.checkError(room.connect("playerExited", self, "_playerExited"))

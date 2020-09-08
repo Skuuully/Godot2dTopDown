@@ -1,20 +1,48 @@
+# BulletManager
+# Bullet object pool which additionally handles bullet collisions, publicly 
+# access via getBullet and removeBullet
 extends Node2D
-# class_name BulletManager Singleton
 
+var activeBullets = []
+var unactiveBullets = []
+var startingPoolSize:int = 20
+var poolExpandSize:int = 10
+var bulletScene = preload("res://Prefabs/Combat/Bullet.tscn")
 var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
-var _bullets = Array() setget ,getAllBullets
 
-func getAllBullets():
-	return _bullets
+func _init() -> void:
+	expandPool(startingPoolSize)
 
-func addBullet(bullet:Bullet):
-	_bullets.push_back(bullet)
-	Utils.checkError(bullet.connect("collision", self, "_onCollision"))
+func expandPool(size:int) -> void:
+	for i in size:
+		addToPool(unactiveBullets)
 
-func _removeBullet(bullet):
-	_bullets.erase(bullet)
+func addToPool(pool) -> void:
+	var instance = bulletScene.instance()
+	pool.push_back(instance)
+	Utils.checkError(instance.connect("collision", self, "onCollision"))
 
-func _onCollision(bullet:Bullet, collisionPosition:Vector2, other:Node) -> void:
+func getLastBullet() -> Bullet:
+	var bullet = unactiveBullets.pop_back()
+	activeBullets.push_back(bullet)
+	add_child(bullet)
+	return bullet
+
+func getBullet() -> Bullet:
+	if unactiveBullets.size() > 0:
+		return getLastBullet()
+	else:
+		expandPool(poolExpandSize)
+		return getLastBullet()
+
+func removeBullet(bullet) -> void:
+	var index = activeBullets.find(bullet)
+	if index != -1:
+		activeBullets.remove(index)
+		unactiveBullets.push_back(bullet)
+		remove_child(bullet)
+
+func onCollision(bullet:Bullet, collisionPosition:Vector2, other:Node) -> void:
 	var damageText = dmgText.instance()
 	damageText.rect_position = collisionPosition
 	var displayDamage = (floor(bullet.getDamage() * 10) / 10)

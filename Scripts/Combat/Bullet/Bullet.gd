@@ -14,8 +14,9 @@ var _collisionParticles = preload("res://Prefabs/Combat/BulletCollisionParticles
 
 var _creator:Node2D setget setCreator, getCreator
 
-func _ready() -> void:
-	BulletManager.addBullet(self)
+func _ready():
+	var lifetime:float = 5.0
+	Utils.checkError(get_tree().create_timer(lifetime).connect("timeout", self, "onTimeout"))
 
 func _physics_process(_delta):
 	var newBodies:Array = get_colliding_bodies()
@@ -51,3 +52,6 @@ func setCreator(creator:Node2D) -> void:
 
 func getCreator() -> Node2D:
 	return _creator
+
+func onTimeout() -> void:
+	BulletManager.removeBullet(self)

@@ -11,6 +11,14 @@ var mapItem = load("res://Prefabs/MapItem.tscn")
 var basicEnemy = load("res://Prefabs/Rooms/BasicRoom.tscn")
 var basicLoot = load("res://Prefabs/Rooms/LootRoom.tscn")
 
+var spacing:Vector2 = Vector2(20, 20)
+var topLeftPosition:Vector2 = position - spacing
+var currentRowColumn = Vector2(0,0)
+var rows:int = 3
+
+func _ready() -> void:
+	topLeftPosition = position - spacing
+
 func spawnLoot() -> void:
 	if !lootSpawned:
 		lootSpawned = true
@@ -30,10 +38,17 @@ func spawnMap() -> void:
 		mapData = MapData.new(basicLoot, 0, MapData.mapType.LOOT)
 	var instance = mapItem.instance()
 	instance.mapData = mapData
-	instance.position = position
 	instance.scale = Vector2(0.3, 0.3)
-	add_child(instance)
+	spawnItem(instance)
 
-func spawnItem() -> void:
+func spawnItem(spawnee) -> void:
+	currentRowColumn.x += 1
+	if currentRowColumn.x == rows:
+		currentRowColumn.x = 0
+		currentRowColumn.y += 1
 	
+	var spawnPos = topLeftPosition + (spacing * currentRowColumn)
+	
+	spawnee.position = spawnPos
+	add_child(spawnee)
 	pass

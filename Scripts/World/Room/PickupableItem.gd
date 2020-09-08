@@ -7,6 +7,7 @@ signal pickedUp()
 
 export(Vector2) var extents = Vector2(10, 10) setget setExtents
 onready var area = $Area2D
+onready var shape = $Area2D/CollisionShape2D
 
 func _ready() -> void:
 	Utils.checkError(area.connect("body_entered", self, "onBodyEntered"))
@@ -17,5 +18,5 @@ func onBodyEntered(body) -> void:
 
 func setExtents(inExtents:Vector2) -> void:
 	extents = inExtents
-	if $Area2D/CollisionShape2D != null:
-		$Area2D/CollisionShape2D.shape.set_extents(extents)
+	if shape != null:
+		shape.shape.set_extents(extents)

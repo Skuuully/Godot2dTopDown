@@ -90,6 +90,7 @@ func deactivate() -> void:
 			enemy.setActive(false)
 
 func roomCleared() -> void:
+	GlobalNodes.getGUIMap().clearCurrentRoomIcon()
 	doors.open()
 	GlobalNodes.getGUI().showNonCombat()
 	lootSpawn.spawnLoot()

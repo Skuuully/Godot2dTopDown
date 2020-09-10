@@ -9,6 +9,7 @@ var _lastFrameLinearVelocity = Vector2(0, 0) setget , getLastFrameLinearVelocity
 var _damage setget setDamage, getDamage
 
 var _collisionParticles = preload("res://Prefabs/Combat/BulletCollisionParticles.tscn")
+var _collisionSound = preload("res://Audio/8BitSoundPack/General Sounds/Impacts/sfx_sounds_impact6.wav")
 var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
 
 var _creator:Node2D setget setCreator, getCreator
@@ -19,11 +20,17 @@ func _physics_process(_delta):
 		createParticles()
 		if body.has_node("Damageable") && (body != _creator):
 			onCollision(body)
-			queue_free()
+			freeMem()
 		else:
-			queue_free()
+			freeMem()
 	
 	_lastFrameLinearVelocity = linear_velocity
+
+func freeMem() -> void:
+	var audioPlayer = $MultipleAudioPlayer
+	remove_child(audioPlayer)
+	get_parent().add_child(audioPlayer)
+	queue_free()
 
 func setDamage(var dmg):
 	_damage = dmg
@@ -35,6 +42,7 @@ func getLastFrameLinearVelocity():
 	return _lastFrameLinearVelocity
 	
 func createParticles():
+	$MultipleAudioPlayer.play(_collisionSound)
 	var particles = _collisionParticles.instance();
 	particles.position = position
 	var currAngle = _lastFrameLinearVelocity.angle() * (180 / PI)

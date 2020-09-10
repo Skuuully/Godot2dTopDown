@@ -76,6 +76,9 @@ func checkCollisions() -> void:
 	pass
 
 func _onDamageTaken() -> void:
+	audioPlayer.play(
+		preload("res://Audio/8BitSoundPack/General Sounds/Negative Sounds/sfx_sounds_damage3.wav"),
+		1.0, 10.0)
 	doShockwave()
 	flash()
 

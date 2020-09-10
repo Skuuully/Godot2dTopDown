@@ -7,10 +7,18 @@ enum mapType {EMPTY, ENEMY, LOOT}
 
 export(PackedScene) var scene = null
 export(Texture) var texture = null
+export(Texture) var borderTexture = null
+export(Color) var borderColour = Color(1.0, 1.0, 1.0, 1.0)
 export(int) var tier = 0
 export(mapType) var type
 
-var icon = preload("res://Sprites/icon.png")
+var emptyIcon = null
+var enemyIcon = preload("res://Sprites/UI/MapIcons/EnemyRoomIcon64.png")
+var lootIcon = preload("res://Sprites/UI/MapIcons/LootIcon64.png")
+
+var tierBorders = [preload("res://Sprites/UI/MapIcons/Tier1Border.png"),
+					preload("res://Sprites/UI/MapIcons/Tier2Border.png"),
+					preload("res://Sprites/UI/MapIcons/Tier3Border.png")]
 
 func _init(inScene:PackedScene, inTier:int, inType) -> void:
 	scene = inScene
@@ -21,8 +29,21 @@ func _init(inScene:PackedScene, inTier:int, inType) -> void:
 func setupTexture() -> void:
 	match type:
 		mapType.EMPTY:
-			texture = icon
+			texture = emptyIcon
+			borderColour = Color(1.0, 1.0, 1.0, 1.0)
 		mapType.ENEMY:
-			texture = icon
+			texture = enemyIcon
+			borderColour = Color(1.0, 0.0, 0.0, 1.0)
 		mapType.LOOT:
-			texture = icon
+			texture = lootIcon
+			borderColour = Color(0.8, 0.8, 0.2, 1.0)
+	
+	# tiers are 1, 2, 3
+	assert(tier < 4 && tier > 0)
+	match tier:
+		1:
+			borderTexture = tierBorders[0]
+		2:
+			borderTexture = tierBorders[1]
+		3:
+			borderTexture = tierBorders[2]

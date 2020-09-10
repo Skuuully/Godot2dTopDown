@@ -4,15 +4,15 @@ class_name MapElement
 
 signal roomPlaced(room, pos)
 
-enum State {EMPTY, HOVER, EMPTY_ROOM, ENEMY_ROOM, LOOT}
+enum State {EMPTY, HOVER, PLACED}
 var currState = State.EMPTY
 
 export(bool) var containsPlayer:bool setget setContainsPlayer
+var gridPosition:Vector2 = Vector2(-1, -1)
 
 var hoverTexture:Texture = preload("res://Sprites/UI/MapIcons/Hover.png")
 export var emptyTexture:Texture = preload("res://Sprites/UI/MapIcons/EmptyRoom.png")
-export var emptyRoomTexture:Texture = preload("res://Sprites/UI/MapIcons/EmptyRoom.png")
-export var enemyRoomTexture:Texture = preload("res://Sprites/UI/MapIcons/EnemyRoom.png")
+export var placedTexture:Texture = preload("res://Sprites/UI/MapIcons/EnemyRoom.png")
 
 func _ready():
 	Utils.checkError(self.connect("mouse_entered", self, "mouse_entered"))
@@ -25,12 +25,8 @@ func changeState(newState) -> void:
 			texture = emptyTexture
 		State.HOVER:
 			texture = hoverTexture
-		State.EMPTY_ROOM:
-			texture = emptyRoomTexture
-		State.ENEMY_ROOM:
-			texture = enemyRoomTexture
-		State.LOOT:
-			texture = enemyRoomTexture
+		State.PLACED:
+			texture = placedTexture
 
 func mouse_entered():
 	if (currState == State.EMPTY):
@@ -50,11 +46,10 @@ func can_drop_data(_position, data):
 func drop_data(_position, data):
 	var room:InventoryRoom = data as InventoryRoom
 	var mapData = room.mapData
-	match (mapData.type):
-		mapData.mapType.EMPTY:
-			changeState(State.EMPTY)
-		mapData.mapType.ENEMY:
-			changeState(State.ENEMY_ROOM)
-		mapData.mapType.LOOT:
-			changeState(State.LOOT)
-	emit_signal("roomPlaced", room, get_parent().getPosition(self))
+	$RoomType.texture = mapData.texture
+	$RoomType.modulate = mapData.borderColour
+	changeState(State.PLACED)
+	emit_signal("roomPlaced", room, gridPosition)
+
+func clearIcon() -> void:
+	$RoomType.texture = null

@@ -9,13 +9,14 @@ onready var inventoryGrid = $MapInventory
 func _ready() -> void:
 	inventoryGrid.columns = inventorySize
 	var mapData = MapData.new(
-		load("res://Prefabs/Rooms/BasicRoom.tscn"), 0, MapData.mapType.ENEMY)
+		load("res://Prefabs/Rooms/BasicRoom.tscn"), 1, MapData.mapType.ENEMY)
 	addRoom(mapData)
 	get_parent().get_child(1).connectToMapElements(self)
 
 func addRoom(map:MapData) -> bool:
 	var added:bool = false
-	var room = InventoryRoom.new(map)
+	var room = preload("res://Prefabs/InventoryRoom.tscn").instance()
+	room.mapData = map
 	if rooms.size() < inventorySize:
 		added = true
 		rooms.append(room)

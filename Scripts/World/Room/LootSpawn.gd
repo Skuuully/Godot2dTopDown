@@ -33,9 +33,9 @@ func spawnMap() -> void:
 	var mapData
 	var rand:int = rng.randi() % 10 + 1
 	if rand > 7:
-		mapData = MapData.new(basicEnemy, 0, MapData.mapType.ENEMY)
+		mapData = MapData.new(basicEnemy, 3, MapData.mapType.ENEMY)
 	else:
-		mapData = MapData.new(basicLoot, 0, MapData.mapType.LOOT)
+		mapData = MapData.new(basicLoot, 2, MapData.mapType.LOOT)
 	var instance = mapItem.instance()
 	instance.mapData = mapData
 	instance.scale = Vector2(0.3, 0.3)

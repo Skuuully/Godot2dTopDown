@@ -1,11 +1,15 @@
 extends Node
 
 var mapData:MapData
-onready var sprite = $Sprite
+onready var typeIcon = $TypeIcon
+onready var roomBorder = $RoomBorder
 onready var pickupable = $PickupableItem
 
 func _ready() -> void:
-	sprite.texture = mapData.texture
+	typeIcon.texture = mapData.texture
+	typeIcon.modulate = mapData.borderColour
+	roomBorder.texture = mapData.borderTexture
+	roomBorder.modulate = mapData.borderColour
 	Utils.checkError(pickupable.connect("pickedUp", self, "onPickup"))
 
 func onPickup() -> void:

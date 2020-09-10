@@ -23,14 +23,15 @@ func _ready():
 	connectToGUI()
 
 func createGrid() -> void:
-	for row in rows:
-		for col in cols:
+	for col in cols:
+		for row in rows:
 			var pos = Position2D.new()
-			pos.position.x = row * xSpace
-			pos.position.y = col * ySpace
+			pos.position.x = col * xSpace
+			pos.position.y = row * ySpace
 			self.add_child(pos)
-			positionMap[Vector2(row, col)] = pos
-			placedMap[Vector2(row, col)] = null
+			var gridPos:Vector2 = Vector2(row, col)
+			positionMap[gridPos] = pos
+			placedMap[gridPos] = null
 	
 	createGUIGrid()
 	placeStartRoomAtCenter()
@@ -47,7 +48,7 @@ func placeStartRoomAtCenter() -> void:
 	get_parent().call_deferred("add_child", startRoomInstance)
 	placedMap[gridPosition] = startRoomInstance
 	emit_signal("roomAdded", startRoomInstance)
-	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.ENEMY_ROOM)
+	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.PLACED)
 	GlobalNodes.getPlayer().global_position = positionMap[gridPosition].position 
 	GlobalNodes.getPlayer().global_position.x += 100
 	GlobalNodes.getPlayer().global_position.y += 100

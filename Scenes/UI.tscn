@@ -28,14 +28,21 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="NonCombat" parent="CanvasLayer" instance=ExtResource( 7 )]
+mouse_filter = 2
 
 [node name="Map" parent="CanvasLayer/NonCombat" instance=ExtResource( 3 )]
-margin_top = 208.0
-margin_bottom = 336.0
+margin_top = 168.0
+margin_bottom = 296.0
 
 [node name="MapInventory" parent="CanvasLayer/NonCombat" instance=ExtResource( 6 )]
+margin_left = 144.0
+margin_top = 256.0
+margin_right = 640.0
+margin_bottom = 320.0
+mouse_filter = 2
 
 [node name="Combat" parent="CanvasLayer" instance=ExtResource( 7 )]
+mouse_filter = 2
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Combat"]
 anchor_right = 1.0
@@ -55,6 +62,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 134.0
 margin_bottom = 84.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Combat/Margin/HBoxContainer"]
 margin_top = 16.0
@@ -67,6 +75,7 @@ text = "Life:"
 margin_left = 50.0
 margin_right = 114.0
 margin_bottom = 64.0
+mouse_filter = 2
 texture_under = ExtResource( 2 )
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 5 )

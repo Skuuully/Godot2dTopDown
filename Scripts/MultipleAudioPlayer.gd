@@ -8,10 +8,11 @@ class_name MultipleAudioPlayer
 var audioPlayers = []
 var map = {}
 
-func play(audioClip, pitch:float = 1.0) -> void:
+func play(audioClip, pitch:float = 1.0, db = 0.0) -> void:
 	var audioPlayer = getAudioPlayer()
 	audioPlayer.stream = audioClip
 	audioPlayer.pitch_scale = pitch
+	audioPlayer.volume_db = db
 	audioPlayer.play()
 	map[audioPlayer] = true
 

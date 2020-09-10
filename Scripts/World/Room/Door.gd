@@ -55,13 +55,13 @@ func getAdjacentRoom() -> Node:
 	var adjacentPosition:Vector2 = room.gridPosition
 	match doorDirection:
 		doorFacing.UP:
-			adjacentPosition.y -= 1
+			adjacentPosition.x -= 1
 		doorFacing.DOWN:
-			adjacentPosition.y += 1
-		doorFacing.LEFT:
-			adjacentPosition.x -= 1 
-		doorFacing.RIGHT:
 			adjacentPosition.x += 1
+		doorFacing.LEFT:
+			adjacentPosition.y -= 1 
+		doorFacing.RIGHT:
+			adjacentPosition.y += 1
 	var worldMap = GlobalNodes.getWorldMap()
 	return worldMap.placedMap.get(adjacentPosition)
 	

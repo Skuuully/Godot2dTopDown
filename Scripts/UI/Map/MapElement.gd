@@ -2,7 +2,7 @@
 extends TextureRect
 class_name MapElement
 
-signal roomPlaced(room, pos)
+signal roomPlaced(mapData, pos)
 
 enum State {EMPTY, HOVER, PLACED}
 var currState = State.EMPTY
@@ -49,7 +49,7 @@ func drop_data(_position, data):
 	$RoomType.texture = mapData.texture
 	$RoomType.modulate = mapData.borderColour
 	changeState(State.PLACED)
-	emit_signal("roomPlaced", room, gridPosition)
+	emit_signal("roomPlaced", room.mapData, gridPosition)
 
 func clearIcon() -> void:
 	$RoomType.texture = null

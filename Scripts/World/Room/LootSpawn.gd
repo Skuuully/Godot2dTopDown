@@ -4,8 +4,6 @@
 extends Node2D
 
 export(RectangleShape2D) var area
-var rng = RandomNumberGenerator.new()
-var lootSpawned:bool = false
 
 var mapItem = load("res://Prefabs/MapItem.tscn")
 var basicEnemy = load("res://Prefabs/Rooms/BasicRoom.tscn")
@@ -16,26 +14,31 @@ var topLeftPosition:Vector2 = position - spacing
 var currentRowColumn = Vector2(0,0)
 var rows:int = 3
 
-func _ready() -> void:
-	topLeftPosition = position - spacing
+var lootSpawned:bool = false
+var tier:int = 1
 
-func spawnLoot() -> void:
+func _ready() -> void:
+	var spacingMultiple = (0.5*rows) - 0.5
+	topLeftPosition = position - (spacingMultiple*spacing)
+
+func spawnLoot(inTier:int) -> void:
+	tier = inTier
 	if !lootSpawned:
 		lootSpawned = true
 		spawnMaps()
 
 func spawnMaps() -> void:
-	var numToSpawn = (rng.randi() % 2) + 1
+	var numToSpawn = (randi() % 2) + 1
 	for i in numToSpawn:
 		spawnMap()
 
 func spawnMap() -> void:
 	var mapData
-	var rand:int = rng.randi() % 10 + 1
+	var rand:int = randi() % 10 + 1
 	if rand > 7:
-		mapData = MapData.new(basicEnemy, 3, MapData.mapType.ENEMY)
+		mapData = MapData.new(basicEnemy, 1, MapData.mapType.ENEMY)
 	else:
-		mapData = MapData.new(basicLoot, 2, MapData.mapType.LOOT)
+		mapData = MapData.new(basicLoot, 1, MapData.mapType.LOOT)
 	var instance = mapItem.instance()
 	instance.mapData = mapData
 	instance.scale = Vector2(0.3, 0.3)

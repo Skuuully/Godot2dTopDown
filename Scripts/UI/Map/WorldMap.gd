@@ -61,15 +61,16 @@ func connectToGUI() -> void:
 				Utils.checkError(child.connect("roomPlaced", self, "onRoomPlaced"))
 
 # @param pos The position of the room in (row,col)
-# @param room The rooms scene to place
-func onRoomPlaced(room, pos:Vector2) -> void:
-	placeRoom(room.mapData.scene, pos)
+# @param room The 
+func onRoomPlaced(mapData, pos:Vector2) -> void:
+	placeRoom(mapData, pos)
 
-func placeRoom(room:PackedScene, pos:Vector2) -> void:
+func placeRoom(mapData:MapData, pos:Vector2) -> void:
 	var position:Position2D = positionMap.get(pos)
-	var instance = room.instance()
+	var instance = mapData.scene.instance()
 	instance.global_position = position.position
 	instance.gridPosition = pos
+	instance.mapData = mapData 
 	get_parent().add_child(instance)
 	placedMap[pos] = instance
 	emit_signal("roomAdded", instance)

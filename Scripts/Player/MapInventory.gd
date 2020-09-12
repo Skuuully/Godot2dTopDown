@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func addMap(map:MapData) -> void:
 	if canAddMap():
+		assert(map is MapData)
 		maps.push_back(map)
 		emit_signal("mapAdded", map)
 

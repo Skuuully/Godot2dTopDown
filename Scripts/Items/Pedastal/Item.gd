@@ -6,6 +6,9 @@ var hideableControl:HideableControl
 var label:Label
 
 func _init() -> void:
+	addHideableLabel()
+
+func addHideableLabel() -> void:
 	hideableControl = preload("res://Prefabs/HideableControl.tscn").instance()
 	add_child(hideableControl)
 	label = preload("res://Prefabs/FontLabel.tscn").instance()

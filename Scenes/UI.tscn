@@ -36,9 +36,6 @@ margin_bottom = 296.0
 
 [node name="MapInventory" parent="CanvasLayer/NonCombat" instance=ExtResource( 6 )]
 margin_left = 144.0
-margin_top = 256.0
-margin_right = 640.0
-margin_bottom = 320.0
 mouse_filter = 2
 
 [node name="Combat" parent="CanvasLayer" instance=ExtResource( 7 )]

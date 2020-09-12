@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/UI/Map/MapBackground.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/UI/Map/Map.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UI/Map/MapContainer.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/MapElement.tscn" type="PackedScene" id=4]
 
@@ -13,7 +12,9 @@ margin_top = -112.0
 margin_right = 152.0
 margin_bottom = 16.0
 mouse_filter = 2
-script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -16.0

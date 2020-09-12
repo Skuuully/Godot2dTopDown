@@ -13,7 +13,8 @@ func _ready() -> void:
 	Utils.checkError(pickupable.connect("pickedUp", self, "onPickup"))
 
 func onPickup() -> void:
-	var canpickup = (GlobalNodes.getGUIMapInventory() as MapInventory).addRoom(mapData)
+	var canpickup = PlayerInventory.getMapInventory().canAddMap()
 	if canpickup:
+		PlayerInventory.getMapInventory().addMap(mapData)
 		pickupable.queue_free()
 		queue_free()

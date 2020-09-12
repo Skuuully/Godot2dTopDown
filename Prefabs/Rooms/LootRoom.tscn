@@ -111,11 +111,12 @@ texture = ExtResource( 10 )
 shape = SubResource( 4 )
 
 [node name="LootSprite" type="Sprite" parent="LootPedastal"]
-position = Vector2( 0, -16 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="MultipleAudioPlayer" type="Node2D" parent="LootPedastal"]
 script = ExtResource( 9 )
+
+[node name="Tween" type="Tween" parent="LootPedastal"]
 
 [node name="LootSpawn" parent="." instance=ExtResource( 8 )]

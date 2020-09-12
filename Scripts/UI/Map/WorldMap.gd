@@ -47,6 +47,7 @@ func placeStartRoomAtCenter() -> void:
 	startRoomInstance.global_position = positionMap.get(gridPosition).position
 	get_parent().call_deferred("add_child", startRoomInstance)
 	placedMap[gridPosition] = startRoomInstance
+	startRoomInstance.tier = 1
 	emit_signal("roomAdded", startRoomInstance)
 	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.PLACED)
 	GlobalNodes.getPlayer().global_position = positionMap[gridPosition].position 
@@ -62,15 +63,15 @@ func connectToGUI() -> void:
 
 # @param pos The position of the room in (row,col)
 # @param room The 
-func onRoomPlaced(mapData, pos:Vector2) -> void:
-	placeRoom(mapData, pos)
+func onRoomPlaced(room, pos:Vector2) -> void:
+	placeRoom(room.mapData, pos)
 
 func placeRoom(mapData:MapData, pos:Vector2) -> void:
 	var position:Position2D = positionMap.get(pos)
 	var instance = mapData.scene.instance()
 	instance.global_position = position.position
 	instance.gridPosition = pos
-	instance.mapData = mapData 
+	instance.tier = mapData.tier
 	get_parent().add_child(instance)
 	placedMap[pos] = instance
 	emit_signal("roomAdded", instance)

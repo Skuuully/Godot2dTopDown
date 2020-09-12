@@ -46,10 +46,11 @@ func can_drop_data(_position, data):
 func drop_data(_position, data):
 	var room:InventoryRoom = data as InventoryRoom
 	var mapData = room.mapData
+	PlayerInventory.getMapInventory().removeMap(mapData)
 	$RoomType.texture = mapData.texture
 	$RoomType.modulate = mapData.borderColour
 	changeState(State.PLACED)
-	emit_signal("roomPlaced", room.mapData, gridPosition)
+	emit_signal("roomPlaced", room, gridPosition)
 
 func clearIcon() -> void:
 	$RoomType.texture = null

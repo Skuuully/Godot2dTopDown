@@ -12,9 +12,9 @@ onready var bounds = $RoomBounds
 onready var doors = $Doors
 onready var lootSpawn = $LootSpawn
 
+var tier:int = 1
 var _enemies = Array()
 var gridPosition:Vector2 = Vector2(-1, -1)
-var mapData:MapData = null
 
 signal playerExited()
 signal playerEntered()
@@ -94,7 +94,7 @@ func roomCleared() -> void:
 	GlobalNodes.getGUIMap().clearCurrentRoomIcon()
 	doors.open()
 	GlobalNodes.getGUI().showNonCombat()
-	lootSpawn.spawnLoot(mapData.tier)
+	lootSpawn.spawnLoot(tier)
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

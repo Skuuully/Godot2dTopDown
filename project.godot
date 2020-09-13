@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Combat/Bullet/Bullet.gd"
 }, {
+"base": "Node",
+"class": "BulletCollisionRegular",
+"language": "GDScript",
+"path": "res://Scripts/Combat/Bullet/BulletCollisionRegular.gd"
+}, {
+"base": "Node",
+"class": "BulletCollisionRicochet",
+"language": "GDScript",
+"path": "res://Scripts/Combat/Bullet/BulletCollisionRicochet.gd"
+}, {
 "base": "Node2D",
 "class": "Damageable",
 "language": "GDScript",
@@ -104,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Items/Pedastal/ItemReinforcedChamber.gd"
 }, {
+"base": "Item",
+"class": "ItemSpeedMuzzle",
+"language": "GDScript",
+"path": "res://Scripts/Items/Pedastal/ItemSpeedMuzzle.gd"
+}, {
 "base": "Node2D",
 "class": "LootSpawn",
 "language": "GDScript",
@@ -165,6 +180,8 @@ _global_script_class_icons={
 "BasicEnemyMoving": "",
 "BasicEnemyStateMachine": "",
 "Bullet": "",
+"BulletCollisionRegular": "",
+"BulletCollisionRicochet": "",
 "Damageable": "",
 "Door": "",
 "Doors": "",
@@ -179,6 +196,7 @@ _global_script_class_icons={
 "Item": "",
 "ItemInventory": "",
 "ItemReinforcedChamber": "",
+"ItemSpeedMuzzle": "",
 "LootSpawn": "",
 "MapContainer": "",
 "MapData": "",
@@ -205,6 +223,7 @@ GlobalNodes="*res://Scripts/Singletons/GlobalNodes.gd"
 PlayerStats="*res://Scripts/Player/PlayerStats.gd"
 PlayerInventory="*res://Scripts/Player/PlayerInventory.gd"
 MouseData="*res://Scripts/UI/Map/MapInventory/MouseData.gd"
+Items="*res://Scripts/Items/Pedastal/Items.gd"
 
 [display]
 

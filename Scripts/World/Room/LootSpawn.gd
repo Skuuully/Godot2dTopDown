@@ -47,4 +47,3 @@ func spawnItem(spawnee) -> void:
 	
 	spawnee.position = spawnPos
 	add_child(spawnee)
-	pass

@@ -13,7 +13,7 @@ func _ready():
 	Utils.checkError($Tween.connect("tween_completed", self, "onBobFinished"))
 
 func generateLootItem() -> void:
-	item = ItemReinforcedChamber.new()
+	item = Items.getRandomItem(1)
 	lootSprite.texture = item.texture
 
 func onBodyEntered(body) -> void:

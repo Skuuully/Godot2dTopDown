@@ -36,3 +36,13 @@ func setMaps(_inMaps) -> void:
 
 func getMaps() -> Array:
 	return maps
+
+func hasEnemyRoom() -> bool:
+	var hasEnemyRoom = false
+	
+	for map in maps:
+		if map.type == MapData.mapType.ENEMY:
+			hasEnemyRoom = true
+			break
+	
+	return hasEnemyRoom

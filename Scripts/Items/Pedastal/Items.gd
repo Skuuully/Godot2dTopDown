@@ -1,16 +1,37 @@
+# Items
+# Collection of all items
 extends Node
 
-# String to Item
-var allItems = {}
+var allItems = []
+var tier1Items = []
+var tier2Items = []
+var tier3Items = []
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	var reinforcedChamber:ItemReinforcedChamber = ItemReinforcedChamber.new()
-	allItems[reinforcedChamber.id()] = reinforcedChamber
-	pass # Replace with function body.
+	addToCollections(reinforcedChamber)
 
+func addToCollections(item:Item) -> void:
+	match item.tier:
+		1:
+			tier1Items.push_back(item)
+		2:
+			tier2Items.push_back(item)
+		3:
+			tier3Items.push_back(item)
+	allItems.push_back(item)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func getRandomItem(tier) -> Item:
+	var item = null
+	match tier:
+		1:
+			item = getRandomItemFromArray(tier1Items)
+		2:
+			item = getRandomItemFromArray(tier2Items)
+		3:
+			item = getRandomItemFromArray(tier3Items)
+	return item
+
+func getRandomItemFromArray(array:Array) -> Item:
+	var index = randi() % array.size()
+	return array[index]

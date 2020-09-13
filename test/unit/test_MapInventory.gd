@@ -20,3 +20,16 @@ func test_canAddLast() -> void:
 	for i in mapInventory.inventorySize - 1:
 		mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.EMPTY))
 	assert_true(mapInventory.canAddMap())
+
+func test_hasEnemyRoom() -> void:
+	var mapInventory = PlayerInventory.getMapInventory()
+	mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.ENEMY))
+	mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.EMPTY))
+	assert_true(mapInventory.hasEnemyRoom())
+
+func test_doesNotHaveEnemyRoom() -> void:
+	var mapInventory = PlayerInventory.getMapInventory()
+	mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.EMPTY))
+	mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.EMPTY))
+	mapInventory.addMap(MapData.new(load(""), 1, MapData.mapType.EMPTY))
+	assert_false(mapInventory.hasEnemyRoom())

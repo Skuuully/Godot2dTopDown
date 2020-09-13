@@ -23,7 +23,7 @@ func generateMaps() -> void:
 		addEnemyRoom()
 
 func requireCriticalRoom() -> bool:
-	return true
+	return !PlayerInventory.getMapInventory().hasEnemyRoom()
 
 func addCriticalRoom() -> void:
 	var instance = mapItem.instance()

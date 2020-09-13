@@ -4,6 +4,8 @@ class_name Item
 export(Texture) var texture
 var hideableControl:HideableControl
 var label:Label
+var tier:int = 0
+var flavourText:String = "No flavour given"
 
 func _init() -> void:
 	addHideableLabel()
@@ -16,7 +18,7 @@ func addHideableLabel() -> void:
 	hideableControl.hideTime = 0.5
 	hideableControl.instantHide()
 	hideableControl.add_child(label)
-	label.text = flavourText()
+	label.text = flavourText
 	label.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	var font = label.get_font("font")
 	font.size = 20
@@ -27,13 +29,8 @@ func addHideableLabel() -> void:
 func do() -> void:
 	display()
 
-func flavourText() -> String:
-	return "No flavour given"
-
-func id() -> String:
-	return "none"
-
 func display() -> void:
 	hideableControl.show()
+	label.text = flavourText
 	yield(get_tree().create_timer(hideableControl.showTime), "timeout")
 	hideableControl.hide()

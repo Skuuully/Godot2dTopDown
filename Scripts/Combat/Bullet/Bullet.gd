@@ -7,6 +7,7 @@ var _lastFrameLinearVelocity = Vector2(0, 0) setget , getLastFrameLinearVelocity
 
 # The damage value that the bullet will hold 
 var _damage setget setDamage, getDamage
+export var speed:int = 100
 
 var _collisionParticles = preload("res://Prefabs/Combat/BulletCollisionParticles.tscn")
 var _collisionSound = preload("res://Audio/8BitSoundPack/General Sounds/Impacts/sfx_sounds_impact6.wav")
@@ -14,16 +15,15 @@ var dmgText = preload("res://Prefabs/Combat/DamageText.tscn")
 
 var _creator:Node2D setget setCreator, getCreator
 
-func _physics_process(_delta):
-	var newBodies:Array = get_colliding_bodies()
-	for body in newBodies:
-		createParticles()
-		if body.has_node("Damageable") && (body != _creator):
-			onCollision(body)
-			freeMem()
-		else:
-			freeMem()
-	
+var bulletCollisionHandler = BulletCollisionRegular.new(self)
+
+func _ready() -> void:
+	Utils.checkError(self.connect("body_entered", self, "onBodyEntered"))
+
+func _integrate_forces(_state):
+	linear_velocity = linear_velocity.normalized() * speed
+
+func _physics_process(_delta):	
 	_lastFrameLinearVelocity = linear_velocity
 
 func freeMem() -> void:
@@ -56,6 +56,14 @@ func setCreator(creator:Node2D) -> void:
 func getCreator() -> Node2D:
 	return _creator
 
+func onBodyEntered(body) -> void:
+	createParticles()
+	if body.has_node("Damageable") && (body != _creator):
+		onCollision(body)
+		if bulletCollisionHandler.has_method("livingCollide"):
+			bulletCollisionHandler.livingCollide()
+	bulletCollisionHandler.collide()
+
 func onCollision(other:Node) -> void:
 	var damageText = dmgText.instance()
 	damageText.rect_position = position
@@ -65,3 +73,9 @@ func onCollision(other:Node) -> void:
 		if other.has_node("Damageable"):
 			other.get_node("Damageable").takeDamage(self)
 	get_tree().get_root().add_child(damageText)
+
+func changeCollisionRicochet(ricochetNum) -> void:
+	bulletCollisionHandler = BulletCollisionRicochet.new(self, ricochetNum)
+
+func changeCollisionRegular() -> void:
+	bulletCollisionHandler = BulletCollisionRegular.new(self)

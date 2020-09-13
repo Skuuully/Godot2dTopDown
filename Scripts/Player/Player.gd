@@ -60,6 +60,7 @@ func createProj() -> void:
 	projInstance.setDamage(PlayerStats.damage())
 	var mousePos:Vector2 = get_global_mouse_position()
 	var bulletDirection:Vector2 = (mousePos - position).normalized()
+	projInstance.speed = PlayerStats.bulletSpeed
 	projInstance.linear_velocity = bulletDirection * PlayerStats.bulletSpeed
 	projInstance.set_position(position + (bulletDirection * 25))
 

@@ -4,8 +4,8 @@ extends Node
 class_name ItemInventory
 
 # String to Item
-var Items = {}
+var Items = []
 
 func add(item) -> void:
-	Items[item.id()] = item
+	Items.push_back(item)
 	item.do()

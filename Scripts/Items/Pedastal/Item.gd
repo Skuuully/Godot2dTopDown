@@ -23,7 +23,9 @@ func addHideableLabel() -> void:
 	var font = label.get_font("font")
 	font.size = 20
 	label.add_font_override("font", font)
-	GlobalNodes.getGUI().get_child(0).add_child(self)
+	var GUI = GlobalNodes.getGUI()
+	if GUI != null:
+		GlobalNodes.getGUI().get_child(0).add_child(self)
 
 # Extending classes should do something up damage/ health/ whatever
 func do() -> void:

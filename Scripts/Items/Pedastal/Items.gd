@@ -8,8 +8,8 @@ var tier2Items = []
 var tier3Items = []
 
 func _ready():
-	var reinforcedChamber:ItemReinforcedChamber = ItemReinforcedChamber.new()
-	addToCollections(reinforcedChamber)
+	addToCollections(ItemReinforcedChamber.new())
+	addToCollections(ItemSpeedMuzzle.new())
 
 func addToCollections(item:Item) -> void:
 	match item.tier:

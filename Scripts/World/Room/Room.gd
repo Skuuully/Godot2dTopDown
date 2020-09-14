@@ -11,25 +11,21 @@ onready var _camera = $RoomCamera
 onready var bounds = $RoomBounds
 onready var doors = $Doors
 onready var lootSpawn = $LootSpawn
+onready var enemySpawn = $EnemySpawnSystem
+onready var enemies = $Enemies
 
 var tier:int = 1
-var _enemies = Array()
 var gridPosition:Vector2 = Vector2(-1, -1)
 
 signal playerExited()
 signal playerEntered()
 
 func _ready():
-	# Get all enemies in the room and add to list, connect to on death so they 
-	# may be removed from the list
-	for child in get_children():
-		if (child != null) && child.has_method("isEnemy"):
-			_enemies.push_back(child)
-			child.connect("died", self, "_onEnemyDeath")
-	
 	# Connect to room bounds, enter and exit methods
-	bounds.connect("body_entered", self, "_bodyEntered")
-	bounds.connect("body_exited", self, "_bodyExited")
+	Utils.checkError(bounds.connect("body_entered", self, "_bodyEntered"))
+	Utils.checkError(bounds.connect("body_exited", self, "_bodyExited"))
+	if enemies != null:
+		Utils.checkError(enemies.connect("enemiesDefeated", self, "roomCleared"))
 
 func activateCamera():
 	_camera.current = true
@@ -39,31 +35,27 @@ func getNavigation():
 	return _navigation
 
 # When the player moves the route for the enemies should be updated
-func playerMoved(position):
+func playerMoved(inPosition):
 	if currentState == state.ACTIVE:
-		_navigation.setPlayerPosition(position)
+		_navigation.setPlayerPosition(inPosition)
 	
-		for enemy in _enemies:
-			if enemy.has_method("setPlayerPosition"):
-				enemy.setPlayerPosition(position)
+		if enemies != null:
+			enemies.updatePlayerPosition(inPosition)
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
 	if body.has_method("isPlayer"):
 		activateCamera()
 		emit_signal("playerEntered", self)
+		if enemySpawn != null:
+			enemySpawn.spawnEnemies(tier)
+			activate()
 
 # Handler for room bounds body exited method
 func _bodyExited(body):
 	if body.has_method("isPlayer"):
 		currentState = state.INACTIVE
 		emit_signal("playerExited")
-
-# Handler for enemy on death
-func _onEnemyDeath(enemy):
-	_enemies.erase(enemy)
-	if _enemies.size() < 1:
-		roomCleared()
 
 func getCameraPosition():
 	return _camera.position
@@ -77,18 +69,15 @@ func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> 
 
 func activate() -> void:
 	activateCamera()
-	if _enemies.size() > 0:
+	if enemies != null && enemies.hasEnemies():
 		GlobalNodes.getGUI().hideNonCombat()
 		doors.close()
-		for enemy in _enemies:
-			if enemy.has_method("setActive"):
-				enemy.setActive(true)
+		enemies.activateEnemies(true)
 	GlobalNodes.getGUIMap().playerEnteredRoom(gridPosition)
 
 func deactivate() -> void:
-	for enemy in _enemies:
-		if enemy.has_method("setActive"):
-			enemy.setActive(false)
+	if enemies != null:
+		enemies.activateEnemies(false)
 
 func roomCleared() -> void:
 	GlobalNodes.getGUIMap().clearCurrentRoomIcon()

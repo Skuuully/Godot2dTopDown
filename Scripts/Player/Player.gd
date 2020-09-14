@@ -72,9 +72,8 @@ func playShotAudio() -> void:
 func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
-		if collision.collider.has_method("isEnemy"):
+		if collision.collider != null && collision.collider.has_method("isEnemy"):
 			damageable.takeDamageInt(1)
-	pass
 
 func _onDamageTaken() -> void:
 	audioPlayer.play(

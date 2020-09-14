@@ -46,4 +46,4 @@ func spawnItem(spawnee) -> void:
 	var spawnPos = topLeftPosition + (spacing * currentRowColumn)
 	
 	spawnee.position = spawnPos
-	add_child(spawnee)
+	call_deferred("add_child", spawnee)

@@ -17,6 +17,7 @@ margin_bottom = -32.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 280, -72 )
+scale = Vector2( 0.33, 0.33 )
 
 [node name="BulletManager" type="Node2D" parent="."]
 
@@ -26,7 +27,7 @@ script = ExtResource( 5 )
 [node name="WorldMap" type="Node2D" parent="."]
 position = Vector2( 96, -40 )
 script = ExtResource( 11 )
-rows = 25
-cols = 25
+rows = 5
+cols = 5
 xSpace = 500
 ySpace = 300

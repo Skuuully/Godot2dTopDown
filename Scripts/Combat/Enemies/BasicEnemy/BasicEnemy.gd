@@ -17,14 +17,14 @@ func _ready() -> void:
 
 func setPlayerPosition(var playerPosition:Vector2) -> void:
 	_targetPosition = playerPosition
-	stateMachine.playerMoved(playerPosition)
-	pass
+	if stateMachine != null:
+		stateMachine.playerMoved(playerPosition)
 
 # Return - A route to get to a point within  
 func getRandCircularPoint():
 	var route = null
 	
-	var parent = get_parent()
+	var parent = get_parent().get_parent()
 	if parent != null && parent is Room:
 		var room:Room = parent as Room
 		# Get a Vector2 as some random point on the edge of a circle
@@ -48,7 +48,8 @@ func _onDeath(_direction:Vector2) -> void:
 func setActive(newActive:bool) -> void:
 	if active != newActive:
 		active = newActive
-		stateMachine.changeState(stateMachine.State.IDLE)
+		if stateMachine != null:
+			stateMachine.changeState(stateMachine.State.IDLE)
 
 # Method that can be cheked for on nodes to determine if the node is an enemy
 # node.has_method("isEnemy") will return true, the method need not do anything

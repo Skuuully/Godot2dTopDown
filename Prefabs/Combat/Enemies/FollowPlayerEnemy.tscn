@@ -12,6 +12,7 @@
 extents = Vector2( 32, 32 )
 
 [node name="FollowPlayerEnemy" type="KinematicBody2D"]
+scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 5 )
 
 [node name="StateMachine" type="Node2D" parent="."]

@@ -20,17 +20,17 @@ func _physics_process(_delta):
 
 func setPlayerPosition(var playerPosition:Vector2) -> void:
 	_targetPosition = playerPosition
-	stateMachine.playerMoved(playerPosition)
+	if stateMachine != null:
+		stateMachine.playerMoved(playerPosition)
 	pass
 
-# Return - A route to get to a point within  
+# Return - A route to get to a point within
 func getRouteToPlayer():
 	var route = null
 	
-	var parent = get_parent()
+	var parent = get_parent().get_parent()
 	if parent != null && parent is Room && (_targetPosition != null):
 		var room:Room = parent as Room
-		
 		route = room.getRouteToPlayer(position)
 	
 	return route
@@ -49,12 +49,13 @@ func _onDeath(direction:Vector2) -> void:
 func setActive(newActive:bool) -> void:
 	if active != newActive:
 		active = newActive
-		stateMachine.changeState(stateMachine.State.IDLE)
+		if stateMachine != null:
+			stateMachine.changeState(stateMachine.State.IDLE)
 
 func checkCollisions() -> void:
 	for i in get_slide_count():
 		var collision:KinematicCollision2D = get_slide_collision(i);
-		if collision.collider.has_method("isPlayer"):
+		if collision.collider != null && collision.collider.has_method("isPlayer"):
 			collision.collider.damageable.takeDamageInt(1)
 
 # Method that can be cheked for on nodes to determine if the node is an enemy

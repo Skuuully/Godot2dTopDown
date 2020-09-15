@@ -15,7 +15,7 @@ export(Color) var unplaceableColour = Color(1.0, 1.0, 1.0, 1.0)
 
 export(bool) var containsPlayer:bool setget setContainsPlayer
 var gridPosition:Vector2 = Vector2(-1, -1)
-var mapData:MapData = null
+var mapData:MapData = null setget setMapData
 
 export(bool) var hidden:bool = false setget setHidden
 export var hiddenTexture:Texture = preload("res://Sprites/UI/MapIcons/QuestionMark.png")
@@ -84,4 +84,8 @@ func updateRoomIcon() -> void:
 
 func setHidden(value:bool) -> void:
 	hidden = value
+	updateRoomIcon()
+
+func setMapData(data) -> void:
+	mapData = data
 	updateRoomIcon()

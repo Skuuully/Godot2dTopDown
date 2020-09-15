@@ -9,9 +9,12 @@ export(int) var cols:int
 export(int) var xSpace:int
 export(int) var ySpace:int
 
-var basicRoom:PackedScene = preload("res://Prefabs/Rooms/BasicRoom.tscn")
-var lootRoom:PackedScene = preload("res://Prefabs/Rooms/LootRoom.tscn")
-var startRoom:PackedScene = preload("res://Prefabs/Rooms/StartRoom.tscn")
+var basicRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/BasicRoom.tscn"),
+									1, MapData.mapType.ENEMY)
+var lootRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/LootRoom.tscn"),
+									1, MapData.mapType.LOOT)
+var startRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/StartRoom.tscn"),
+									1, MapData.mapType.EMPTY)
 
 # Map of vector2(row,col) to Position2D(World space for rooms)
 var positionMap = {}
@@ -36,33 +39,31 @@ func createGrid() -> void:
 	
 	createGUIGrid()
 	placeStartRoomAtCenter()
-	placeLootRoom(Vector2((randi() % 2) + 1, (randi() % 2) + 1))
+	placeLootRoom(Vector2(Utils.randPosMin(1, 2), Utils.randPosMin(1, 2)))
 
 func createGUIGrid() -> void:
 	GlobalNodes.getGUIMap().initialiseGrid(rows, cols)
 
 func placeStartRoomAtCenter() -> void:
-	var startRoomInstance = startRoom.instance()
 	var rowPos = floor(rows as float / 2.0)
 	var colPos = floor(cols as float / 2.0)
 	var gridPosition = Vector2(rowPos, colPos)
-	placeRoom(startRoomInstance, gridPosition)
-	startRoomInstance.tier = 1
+	placeRoom(startRoom, gridPosition)
 	GlobalNodes.getPlayer().global_position = positionMap[gridPosition].position 
 	GlobalNodes.getPlayer().global_position.x += 100
 	GlobalNodes.getPlayer().global_position.y += 100
 
 func placeLootRoom(distFromCenter:Vector2) -> void:
-	var lootRoomInstance = lootRoom.instance()
 	var center:Vector2 = Vector2(floor(rows as float / 2.0), floor(cols as float / 2.0))
-	placeRoom(lootRoomInstance, center + distFromCenter)
+	placeRoom(lootRoom, center + distFromCenter)
 
-func placeRoom(roomInstance, gridPosition:Vector2) -> void:
+func placeRoom(room:MapData, gridPosition:Vector2) -> void:
+	var roomInstance = room.scene.instance()
 	roomInstance.global_position = positionMap.get(gridPosition).position
 	get_parent().call_deferred("add_child", roomInstance)
 	placedMap[gridPosition] = roomInstance
 	emit_signal("roomAdded", roomInstance)
-	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.PLACED)
+	GlobalNodes.getGUIMap().roomAdded(gridPosition, room)
 
 func connectToGUI() -> void:
 	var guiMap = get_parent().find_node("MapContainer", true, false)

@@ -20,3 +20,18 @@ func getAllChildren(node:Node) -> Array:
 	
 	return children
 
+# Gets a random int value within the range of minValue to maxValue as either a
+# positive or negative number
+func randPosMin(minValue, maxValue) -> int:
+	randomize()
+	var randRange = maxValue - minValue + 1
+	var value = (randi() % randRange) + minValue
+	if randBool():
+		value *= -1
+	
+	return value
+
+func randBool() -> bool:
+	randomize()
+	return randi() % 2 == 0
+

@@ -21,10 +21,11 @@ func initialiseGrid(row:int, col:int) -> void:
 			instance.gridPosition = Vector2(r, c)
 			mapElements[Vector2(r, c)] = instance
 
-func roomAdded(position:Vector2, state) -> void:
+func roomAdded(position:Vector2, mapData) -> void:
 	var element = mapElements.get(position)
 	if element is MapElement:
-		(element as MapElement).changeState(state)
+		element.mapData = mapData
+		(element as MapElement).changeState(MapElement.State.PLACED)
 
 func playerEnteredRoom(roomPosition:Vector2) -> void:
 	mapElements[currentRoom].setContainsPlayer(false)

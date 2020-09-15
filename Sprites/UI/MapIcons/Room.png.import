@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hover.png-6dd3bf33eaf4d8f3ade096a731f13ad2.stex"
+path="res://.import/Room.png-c5a5825c2b3e7adcdb355a990f81a734.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/MapIcons/Hover.png"
-dest_files=[ "res://.import/Hover.png-6dd3bf33eaf4d8f3ade096a731f13ad2.stex" ]
+source_file="res://Sprites/UI/MapIcons/Room.png"
+dest_files=[ "res://.import/Room.png-c5a5825c2b3e7adcdb355a990f81a734.stex" ]
 
 [params]
 

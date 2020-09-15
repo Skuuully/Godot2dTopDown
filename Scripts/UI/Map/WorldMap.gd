@@ -10,6 +10,7 @@ export(int) var xSpace:int
 export(int) var ySpace:int
 
 var basicRoom:PackedScene = preload("res://Prefabs/Rooms/BasicRoom.tscn")
+var lootRoom:PackedScene = preload("res://Prefabs/Rooms/LootRoom.tscn")
 var startRoom:PackedScene = preload("res://Prefabs/Rooms/StartRoom.tscn")
 
 # Map of vector2(row,col) to Position2D(World space for rooms)
@@ -35,6 +36,7 @@ func createGrid() -> void:
 	
 	createGUIGrid()
 	placeStartRoomAtCenter()
+	placeLootRoom(Vector2((randi() % 2) + 1, (randi() % 2) + 1))
 
 func createGUIGrid() -> void:
 	GlobalNodes.getGUIMap().initialiseGrid(rows, cols)
@@ -44,15 +46,23 @@ func placeStartRoomAtCenter() -> void:
 	var rowPos = floor(rows as float / 2.0)
 	var colPos = floor(cols as float / 2.0)
 	var gridPosition = Vector2(rowPos, colPos)
-	startRoomInstance.global_position = positionMap.get(gridPosition).position
-	get_parent().call_deferred("add_child", startRoomInstance)
-	placedMap[gridPosition] = startRoomInstance
+	placeRoom(startRoomInstance, gridPosition)
 	startRoomInstance.tier = 1
-	emit_signal("roomAdded", startRoomInstance)
-	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.PLACED)
 	GlobalNodes.getPlayer().global_position = positionMap[gridPosition].position 
 	GlobalNodes.getPlayer().global_position.x += 100
 	GlobalNodes.getPlayer().global_position.y += 100
+
+func placeLootRoom(distFromCenter:Vector2) -> void:
+	var lootRoomInstance = lootRoom.instance()
+	var center:Vector2 = Vector2(floor(rows as float / 2.0), floor(cols as float / 2.0))
+	placeRoom(lootRoomInstance, center + distFromCenter)
+
+func placeRoom(roomInstance, gridPosition:Vector2) -> void:
+	roomInstance.global_position = positionMap.get(gridPosition).position
+	get_parent().call_deferred("add_child", roomInstance)
+	placedMap[gridPosition] = roomInstance
+	emit_signal("roomAdded", roomInstance)
+	GlobalNodes.getGUIMap().roomAdded(gridPosition, MapElement.State.PLACED)
 
 func connectToGUI() -> void:
 	var guiMap = get_parent().find_node("MapContainer", true, false)
@@ -64,9 +74,9 @@ func connectToGUI() -> void:
 # @param pos The position of the room in (row,col)
 # @param room The 
 func onRoomPlaced(room, pos:Vector2) -> void:
-	placeRoom(room.mapData, pos)
+	placeMap(room.mapData, pos)
 
-func placeRoom(mapData:MapData, pos:Vector2) -> void:
+func placeMap(mapData:MapData, pos:Vector2) -> void:
 	var position:Position2D = positionMap.get(pos)
 	var instance = mapData.scene.instance()
 	instance.global_position = position.position

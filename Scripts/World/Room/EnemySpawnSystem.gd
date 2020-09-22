@@ -70,6 +70,7 @@ func spawnEnemies(tier:int) -> void:
 		var config:EnemySpawnConfig = getRandomConfig(tier)
 		for enemySpawn in config.enemySpawns:
 			enemySpawn = enemySpawn as EnemySpawn
-			var enemy = enemySpawn.scene.instance()
-			enemy.position = enemySpawn.position
-			enemiesNode.addEnemy(enemy)
+			var spawnCircle = preload("res://Prefabs/SpawnCircle.tscn").instance()
+			spawnCircle.position = enemySpawn.position
+			add_child(spawnCircle)
+			spawnCircle.setEnemy(enemySpawn.scene, enemiesNode)

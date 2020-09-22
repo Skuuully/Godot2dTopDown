@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
-"class": "BasicEnemy",
+"class": "BaseEnemy",
 "language": "GDScript",
-"path": "res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemy.gd"
+"path": "res://Scripts/Combat/Enemies/BaseEnemy.gd"
 }, {
 "base": "EnemyState",
 "class": "BasicEnemyIdle",
@@ -84,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Combat/Enemies/EnemyStateMachine.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "BaseEnemy",
 "class": "FollowPlayerEnemy",
 "language": "GDScript",
 "path": "res://Scripts/Combat/Enemies/FollowPlayerEnemy/FollowPlayerEnemy.gd"
@@ -185,12 +185,17 @@ _global_script_classes=[ {
 "path": "res://Scripts/World/Room/Room.gd"
 }, {
 "base": "Node2D",
+"class": "SpawnCircle",
+"language": "GDScript",
+"path": "res://Scripts/Combat/SpawnCircle.gd"
+}, {
+"base": "Node2D",
 "class": "WorldMap",
 "language": "GDScript",
 "path": "res://Scripts/UI/Map/WorldMap.gd"
 } ]
 _global_script_class_icons={
-"BasicEnemy": "",
+"BaseEnemy": "",
 "BasicEnemyIdle": "",
 "BasicEnemyMoving": "",
 "BasicEnemyStateMachine": "",
@@ -225,6 +230,7 @@ _global_script_class_icons={
 "MultipleAudioPlayer": "",
 "Player": "",
 "Room": "",
+"SpawnCircle": "",
 "WorldMap": ""
 }
 

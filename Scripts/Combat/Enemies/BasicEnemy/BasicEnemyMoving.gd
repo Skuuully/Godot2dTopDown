@@ -20,7 +20,7 @@ func _followRoute() -> void:
 		_stateMachine.changeState(BasicEnemyStateMachine.State.IDLE)
 	else:
 		# There is a route set so go ahead and follow it
-		var kinematicNode = _stateMachine.get_parent()
+		var kinematicNode = _stateMachine.get_parent().kinematic
 		var dir:Vector2 = (_route[0] - kinematicNode.global_position).normalized()
 		
 		if dir == Vector2.ZERO:
@@ -41,7 +41,7 @@ func _findRoute() -> void:
 	# The base enemy node
 	var baseNode = _stateMachine.get_parent()
 	if baseNode != null:
-		var base:BasicEnemy = baseNode as BasicEnemy
+		var base:FollowPlayerEnemy = baseNode as FollowPlayerEnemy
 		setRoute(base.getRandCircularPoint())
 
 func setRoute(var route:PoolVector2Array) -> void:

@@ -1,7 +1,7 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/Combat/Enemies/EnemyNavigation2D.gd" type="Script" id=1]
-[ext_resource path="res://Prefabs/Combat/Enemies/BasicEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/MultipleAudioPlayer.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/World/Room/Room.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/Combat/Enemies/FollowPlayerEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=5]
@@ -13,6 +13,13 @@
 [ext_resource path="res://Scripts/World/Room/EnemySpawn.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/World/Room/EnemySpawnSystem.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/World/Room/Enemies.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyMoving.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyShooting.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyStateMachine.gd" type="Script" id=16]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyIdle.gd" type="Script" id=17]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=18]
+[ext_resource path="res://Prefabs/Combat/Damageable.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Shaders/WhiteFlash.shader" type="Shader" id=20]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 32, 32, 320, 32, 320, 144, 32, 144 )
@@ -67,10 +74,61 @@ script = ExtResource( 9 )
 tier = 1
 enemySpawns = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
 
+[sub_resource type="Shader" id=16]
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+
+[sub_resource type="GDScript" id=18]
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/white = false
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="Animation" id=21]
+resource_name = "New Anim"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/white")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="PackedScene" id=22]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "BasicEnemy", "material", "scale", "script", "KinematicBody2D", "StateMachine", "Node2D", "Idle", "Node", "Moving", "Shooting", "BULLET_COUNT", "CenterPoint", "Position2D", "ProjSpawn", "position", "MultipleAudioPlayer", "StateDisplay", "visible", "margin_left", "margin_top", "margin_right", "margin_bottom", "mouse_filter", "text", "__meta__", "RichTextLabel", "Sprite", "texture", "CollisionShape2D", "shape", "Damageable", "AnimationPlayer", "anims/New Anim" ),
+"node_count": 13,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 6, 5, -1, 1, 3, 3, 0, 1, 0, 8, 7, -1, 1, 3, 4, 0, 1, 0, 8, 9, -1, 1, 3, 5, 0, 1, 0, 6, 10, -1, 2, 3, 6, 11, 7, 0, 4, 0, 13, 12, -1, 0, 0, 4, 0, 13, 14, -1, 1, 15, 8, 0, 4, 0, 6, 16, -1, 1, 3, 9, 0, 1, 0, 26, 17, -1, 8, 18, 10, 19, 11, 20, 12, 21, 13, 22, 14, 23, 15, 24, 16, 25, 17, 0, 0, 0, 27, 27, -1, 3, 1, 18, 28, 19, 25, 20, 0, 0, 0, 29, 29, -1, 3, 18, 10, 30, 21, 25, 22, 0, 0, 0, 2147483647, 31, 23, 0, 0, 0, 0, 32, 32, -1, 1, 33, 24, 0 ),
+"variants": [ SubResource( 17 ), Vector2( 0.33, 0.33 ), SubResource( 18 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 15 ), 8, Vector2( 48, -48 ), ExtResource( 2 ), false, -48.0, 40.0, 56.0, 72.0, 2, "Not entered", {
+"_edit_use_anchors_": false
+}, SubResource( 19 ), ExtResource( 18 ), {
+"_edit_lock_": true
+}, SubResource( 20 ), {
+"_edit_lock_": true
+}, ExtResource( 19 ), SubResource( 21 ) ],
+"version": 2
+}
+
 [sub_resource type="Resource" id=8]
 script = ExtResource( 11 )
 position = Vector2( 50, 50 )
-scene = ExtResource( 2 )
+scene = SubResource( 22 )
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 11 )
@@ -90,12 +148,12 @@ enemySpawns = [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ]
 [sub_resource type="Resource" id=12]
 script = ExtResource( 11 )
 position = Vector2( 160, 100 )
-scene = ExtResource( 2 )
+scene = SubResource( 22 )
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 11 )
 position = Vector2( 180, 100 )
-scene = ExtResource( 2 )
+scene = SubResource( 22 )
 
 [sub_resource type="Resource" id=14]
 script = ExtResource( 11 )

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/World/Room/EnemySpawnConfig.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World/Room/EnemySpawn.gd" type="Script" id=2]
-[ext_resource path="res://Prefabs/Combat/Enemies/BasicEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Combat/Enemies/DirectionalShotEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )

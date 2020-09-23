@@ -4,7 +4,7 @@ class_name FollowPlayerEnemyFollowState
 var routeToPlayer = null
 
 var _route = null
-var MOVE_SPEED:int = 20
+var MOVE_SPEED:int = 30
 
 func enter() -> void:
 	# Change the animation state to moving

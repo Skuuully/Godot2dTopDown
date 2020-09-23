@@ -21,11 +21,6 @@ func _ready():
 	Utils.checkError(player.connect("moved", self, "_onPlayerMove"))
 	Utils.checkError(player.damageable.connect("damageTaken", self, "_onPlayerDamageTaken"))
 	Utils.checkError(worldMap.connect("roomAdded", self, "_onRoomAdded"))
-	
-	for child in get_children():
-		if (child != null) && child.has_method("isRoom"):
-			Utils.checkError(child.connect("playerExited", self, "_playerExited"))
-			Utils.checkError(child.connect("playerEntered", self, "_playerEntered"))
 
 # Handler for when the player moves
 func _onPlayerMove(playerPosition):

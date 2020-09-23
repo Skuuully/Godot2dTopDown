@@ -38,6 +38,10 @@ func createGrid() -> void:
 			placedMap[gridPos] = null
 	
 	createGUIGrid()
+	
+	# Small wait before adding, the listener for adding rooms happens after this ready,
+	# children of a node are readied before the parent
+	yield(get_tree().create_timer(0.2), "timeout")
 	placeStartRoomAtCenter()
 	placeLootRoom(Vector2(Utils.randPosMin(1, 2), Utils.randPosMin(1, 2)))
 
@@ -60,6 +64,7 @@ func placeLootRoom(distFromCenter:Vector2) -> void:
 func placeRoom(room:MapData, gridPosition:Vector2) -> void:
 	var roomInstance = room.scene.instance()
 	roomInstance.global_position = positionMap.get(gridPosition).position
+	roomInstance.gridPosition = gridPosition
 	get_parent().call_deferred("add_child", roomInstance)
 	placedMap[gridPosition] = roomInstance
 	emit_signal("roomAdded", roomInstance)

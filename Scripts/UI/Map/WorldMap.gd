@@ -9,7 +9,7 @@ export(int) var cols:int
 export(int) var xSpace:int
 export(int) var ySpace:int
 
-var basicRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/BasicRoom.tscn"),
+var basicRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/EnemyRoom.tscn"),
 									1, MapData.mapType.ENEMY)
 var lootRoom:MapData = MapData.new(preload("res://Prefabs/Rooms/LootRoom.tscn"),
 									1, MapData.mapType.LOOT)

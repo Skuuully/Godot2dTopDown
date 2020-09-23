@@ -1,0 +1,196 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://Scripts/World/Room/EnemySpawnSystem.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyShooting.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/World/Room/EnemySpawn.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/World/Room/EnemySpawnConfig.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyIdle.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyMoving.gd" type="Script" id=6]
+[ext_resource path="res://Shaders/WhiteFlash.shader" type="Shader" id=7]
+[ext_resource path="res://Scripts/World/Room/EnemySpawnConfig.tres" type="Resource" id=8]
+[ext_resource path="res://Scripts/MultipleAudioPlayer.gd" type="Script" id=9]
+[ext_resource path="res://Prefabs/LootSpawn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/Combat/Enemies/FollowPlayerEnemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Prefabs/Combat/Damageable.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/Combat/Enemies/BasicEnemy/BasicEnemyStateMachine.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=14]
+[ext_resource path="res://2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/World/Room/Enemies.gd" type="Script" id=16]
+[ext_resource path="res://Prefabs/Rooms/BaseRoom.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scripts/World/Room/EnemyRoom.gd" type="Script" id=18]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+position = Vector2( 200, 100 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+position = Vector2( 250, 100 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+position = Vector2( 150, 100 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+tier = 1
+enemySpawns = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+
+[sub_resource type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+
+[sub_resource type="GDScript" id=10]
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/white = false
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "New Anim"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/white")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="PackedScene" id=14]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "BasicEnemy", "material", "scale", "script", "KinematicBody2D", "StateMachine", "Node2D", "Idle", "Node", "Moving", "Shooting", "BULLET_COUNT", "CenterPoint", "Position2D", "ProjSpawn", "position", "MultipleAudioPlayer", "StateDisplay", "visible", "margin_left", "margin_top", "margin_right", "margin_bottom", "mouse_filter", "text", "__meta__", "RichTextLabel", "Sprite", "texture", "CollisionShape2D", "shape", "Damageable", "AnimationPlayer", "anims/New Anim" ),
+"node_count": 13,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 6, 5, -1, 1, 3, 3, 0, 1, 0, 8, 7, -1, 1, 3, 4, 0, 1, 0, 8, 9, -1, 1, 3, 5, 0, 1, 0, 6, 10, -1, 2, 3, 6, 11, 7, 0, 4, 0, 13, 12, -1, 0, 0, 4, 0, 13, 14, -1, 1, 15, 8, 0, 4, 0, 6, 16, -1, 1, 3, 9, 0, 1, 0, 26, 17, -1, 8, 18, 10, 19, 11, 20, 12, 21, 13, 22, 14, 23, 15, 24, 16, 25, 17, 0, 0, 0, 27, 27, -1, 3, 1, 18, 28, 19, 25, 20, 0, 0, 0, 29, 29, -1, 3, 18, 10, 30, 21, 25, 22, 0, 0, 0, 2147483647, 31, 23, 0, 0, 0, 0, 32, 32, -1, 1, 33, 24, 0 ),
+"variants": [ SubResource( 9 ), Vector2( 0.33, 0.33 ), SubResource( 10 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ), 8, Vector2( 48, -48 ), ExtResource( 9 ), false, -48.0, 40.0, 56.0, 72.0, 2, "Not entered", {
+"_edit_use_anchors_": false
+}, SubResource( 11 ), ExtResource( 14 ), {
+"_edit_lock_": true
+}, SubResource( 12 ), {
+"_edit_lock_": true
+}, ExtResource( 12 ), SubResource( 13 ) ],
+"version": 2
+}
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+position = Vector2( 50, 50 )
+scene = SubResource( 14 )
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+position = Vector2( 75, 50 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+position = Vector2( 100, 50 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+tier = 2
+enemySpawns = [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ]
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+position = Vector2( 160, 100 )
+scene = SubResource( 14 )
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+position = Vector2( 180, 100 )
+scene = SubResource( 14 )
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+position = Vector2( 200, 100 )
+scene = ExtResource( 11 )
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 4 )
+tier = 3
+enemySpawns = [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ]
+
+[sub_resource type="TileSet" id=3]
+0/name = "Dungeon_Tileset.png 0"
+0/texture = ExtResource( 15 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 161, 161 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 288, Vector2( 0, 1 ), 292, Vector2( 0, 2 ), 384, Vector2( 0, 3 ), 511, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 192, Vector2( 1, 3 ), 511, Vector2( 1, 5 ), 19922944, Vector2( 1, 6 ), 19267584, Vector2( 2, 0 ), 72, Vector2( 2, 1 ), 73, Vector2( 2, 5 ), 33488896, Vector2( 2, 6 ), 33488896, Vector2( 2, 7 ), 3604480, Vector2( 3, 3 ), 4, Vector2( 3, 5 ), 33488896, Vector2( 3, 6 ), 33488896, Vector2( 4, 5 ), 33226752, Vector2( 4, 6 ), 33488896, Vector2( 5, 2 ), 16777216, Vector2( 5, 3 ), 9437455, Vector2( 5, 4 ), 28901446, Vector2( 5, 5 ), 33226756, Vector2( 5, 6 ), 33488896, Vector2( 5, 7 ), 131072, Vector2( 6, 2 ), 4194304, Vector2( 6, 3 ), 27066370, Vector2( 6, 4 ), 28573762, Vector2( 6, 5 ), 32702468, Vector2( 6, 6 ), 33488896, Vector2( 6, 7 ), 19333120, Vector2( 6, 8 ), 1441792, Vector2( 7, 3 ), 5767458, Vector2( 7, 4 ), 27656272, Vector2( 7, 5 ), 31129600, Vector2( 7, 6 ), 24838144, Vector2( 7, 7 ), 27197440, Vector2( 8, 4 ), 16777304, Vector2( 8, 5 ), 16646144, Vector2( 8, 6 ), 33226752, Vector2( 8, 7 ), 65536, Vector2( 9, 6 ), 65536 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="Room" instance=ExtResource( 17 )]
+script = ExtResource( 18 )
+
+[node name="RoomCamera" parent="." index="0"]
+current = false
+
+[node name="EnemySpawnSystem" type="Node2D" parent="." index="4"]
+script = ExtResource( 1 )
+enemySpawnConfigs = [ ExtResource( 8 ), SubResource( 7 ), SubResource( 18 ), SubResource( 22 ) ]
+enemiesNodePath = NodePath("../Enemies")
+
+[node name="Enemies" type="Node2D" parent="." index="5"]
+script = ExtResource( 16 )
+
+[node name="LootSpawn" parent="." index="6" instance=ExtResource( 10 )]
+position = Vector2( 64, 48 )
+
+[node name="TileMap" type="TileMap" parent="." index="7"]
+z_index = -1
+tile_set = SubResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65535, 0, 393223, 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 2, 11, 0, 196609, 65536, 0, 65536, 65537, 0, 65537, 65538, 0, 65537, 65539, 0, 65537, 65540, 0, 65537, 65541, 0, 65537, 65542, 0, 65537, 65543, 0, 65537, 65544, 0, 65537, 65545, 0, 65537, 65546, 0, 65538, 65547, 0, 196609, 131072, 0, 65536, 131073, 0, 65537, 131074, 0, 65537, 131075, 0, 65537, 131076, 0, 65537, 131077, 0, 65537, 131078, 0, 65537, 131079, 0, 65537, 131080, 0, 65537, 131081, 0, 65537, 131082, 0, 65538, 131083, 0, 196609, 196608, 0, 65536, 196609, 0, 65537, 196610, 0, 65537, 196611, 0, 65537, 196612, 0, 65537, 196613, 0, 65537, 196614, 0, 65537, 196615, 0, 65537, 196616, 0, 65537, 196617, 0, 65537, 196618, 0, 65538, 196619, 0, 196609, 262144, 0, 65536, 262145, 0, 65537, 262146, 0, 65537, 262147, 0, 65537, 262148, 0, 65537, 262149, 0, 65537, 262150, 0, 65537, 262151, 0, 65537, 262152, 0, 65537, 262153, 0, 65537, 262154, 0, 65538, 262155, 0, 196609, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131073, 327683, 0, 131073, 327684, 0, 131073, 327685, 0, 131073, 327686, 0, 131073, 327687, 0, 131073, 327688, 0, 131073, 327689, 0, 131073, 327690, 0, 131074, 327691, 0, 196609 )
+
+[node name="TemporaryFakeWalls" type="Node2D" parent="." index="8"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TemporaryFakeWalls" index="0"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TemporaryFakeWalls/StaticBody2D" index="0"]
+polygon = PoolVector2Array( 0, 56, 16, 56, 16, 16, 144, 16, 144, 0, 0, 0 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TemporaryFakeWalls/StaticBody2D" index="1"]
+polygon = PoolVector2Array( 0, 120, 16, 120, 16, 160, 144, 160, 144, 176, 0, 176 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="TemporaryFakeWalls/StaticBody2D" index="2"]
+polygon = PoolVector2Array( 208, 160, 208, 176, 352, 176, 352, 120, 336, 120, 336, 160 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="TemporaryFakeWalls/StaticBody2D" index="3"]
+polygon = PoolVector2Array( 208, 0, 208, 16, 336, 16, 336, 56, 352, 56, 352, 0 )

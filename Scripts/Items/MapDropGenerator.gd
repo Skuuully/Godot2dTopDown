@@ -28,7 +28,7 @@ func requireCriticalRoom() -> bool:
 func addCriticalRoom() -> void:
 	var instance = mapItem.instance()
 	instance.mapData = MapData.new(
-		load("res://Prefabs/Rooms/BasicRoom.tscn"), 1, MapData.mapType.ENEMY)
+		load("res://Prefabs/Rooms/EnemyRoom.tscn"), 1, MapData.mapType.ENEMY)
 	maps.push_back(instance)
 
 func shouldAddLootRoom() -> bool:
@@ -50,5 +50,5 @@ func addEnemyRoom() -> void:
 	var instance = mapItem.instance()
 	var roomTier:int = randi() % (tier + 1) + 1
 	instance.mapData = MapData.new(
-		load("res://Prefabs/Rooms/BasicRoom.tscn"), roomTier, MapData.mapType.ENEMY)
+		load("res://Prefabs/Rooms/EnemyRoom.tscn"), roomTier, MapData.mapType.ENEMY)
 	maps.push_back(instance)

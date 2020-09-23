@@ -9,7 +9,7 @@ export(RectangleShape2D) var area
 onready var mapDropGen = $MapDropGenerator
 
 var mapItem = load("res://Prefabs/MapItem.tscn")
-var basicEnemy = load("res://Prefabs/Rooms/BasicRoom.tscn")
+var basicEnemy = load("res://Prefabs/Rooms/EnemyRoom.tscn")
 var basicLoot = load("res://Prefabs/Rooms/LootRoom.tscn")
 
 var spacing:Vector2 = Vector2(20, 20)

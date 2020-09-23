@@ -40,6 +40,6 @@ func _playerEntered(newRoom):
 func _onPlayerDamageTaken() -> void:
 	_gui.updateLife(player.getLife(), player.MAX_LIFE)
 
-func _onRoomAdded(room:Room) -> void:
+func _onRoomAdded(room) -> void:
 	Utils.checkError(room.connect("playerExited", self, "_playerExited"))
 	Utils.checkError(room.connect("playerEntered", self, "_playerEntered"))

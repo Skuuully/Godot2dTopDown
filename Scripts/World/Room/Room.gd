@@ -10,9 +10,6 @@ onready var _navigation = $RoomNavigation setget , getNavigation
 onready var _camera = $RoomCamera
 onready var bounds = $RoomBounds
 onready var doors = $Doors
-onready var lootSpawn = $LootSpawn
-onready var enemySpawn = $EnemySpawnSystem
-onready var enemies = $Enemies
 
 var tier:int = 1
 var gridPosition:Vector2 = Vector2(-1, -1)
@@ -24,8 +21,6 @@ func _ready():
 	# Connect to room bounds, enter and exit methods
 	Utils.checkError(bounds.connect("body_entered", self, "_bodyEntered"))
 	Utils.checkError(bounds.connect("body_exited", self, "_bodyExited"))
-	if enemies != null:
-		Utils.checkError(enemies.connect("enemiesDefeated", self, "roomCleared"))
 
 func activateCamera():
 	_camera.current = true
@@ -38,18 +33,12 @@ func getNavigation():
 func playerMoved(inPosition):
 	if currentState == state.ACTIVE:
 		_navigation.setPlayerPosition(inPosition)
-	
-		if enemies != null:
-			enemies.updatePlayerPosition(inPosition)
 
 # Handler for room bounds body entered method
 func _bodyEntered(body):
 	if body.has_method("isPlayer"):
 		activateCamera()
 		emit_signal("playerEntered", self)
-		if enemySpawn != null:
-			enemySpawn.spawnEnemies(tier)
-			activate()
 
 # Handler for room bounds body exited method
 func _bodyExited(body):
@@ -69,21 +58,15 @@ func calculateRoute(var currentPosition:Vector2, var targetPosition:Vector2) -> 
 
 func activate() -> void:
 	activateCamera()
-	if enemies != null && enemies.hasEnemies():
-		GlobalNodes.getGUI().hideNonCombat()
-		doors.close()
-		enemies.activateEnemies(true)
 	GlobalNodes.getGUIMap().playerEnteredRoom(gridPosition)
 
 func deactivate() -> void:
-	if enemies != null:
-		enemies.activateEnemies(false)
+	pass
 
 func roomCleared() -> void:
 	GlobalNodes.getGUIMap().clearCurrentRoomIcon()
 	doors.open()
 	GlobalNodes.getGUI().showNonCombat()
-	lootSpawn.spawnLoot(tier)
 
 # Method that can be cheked for on nodes to determine if the node is a room
 # node.has_method("isRoom") will return true, the method need not do anything

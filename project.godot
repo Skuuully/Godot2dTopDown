@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/World/Room/Enemies.gd"
 }, {
+"base": "Room",
+"class": "EnemyRoom",
+"language": "GDScript",
+"path": "res://Scripts/World/Room/EnemyRoom.gd"
+}, {
 "base": "Resource",
 "class": "EnemySpawn",
 "language": "GDScript",
@@ -206,6 +211,7 @@ _global_script_class_icons={
 "Door": "",
 "Doors": "",
 "Enemies": "",
+"EnemyRoom": "",
 "EnemySpawn": "",
 "EnemySpawnConfig": "",
 "EnemyState": "",

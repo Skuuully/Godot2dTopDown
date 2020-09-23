@@ -12,7 +12,7 @@ var maps:Array = [] setget setMaps, getMaps
 func _ready() -> void:
 	# Init with some rooms to begin with
 	var mapData = MapData.new(
-		load("res://Prefabs/Rooms/BasicRoom.tscn"), 1, MapData.mapType.ENEMY)
+		load("res://Prefabs/Rooms/EnemyRoom.tscn"), 1, MapData.mapType.ENEMY)
 	addMap(mapData)
 	mapData = MapData.new(
 		load("res://Prefabs/Rooms/LootRoom.tscn"), 1, MapData.mapType.LOOT)
